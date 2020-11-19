@@ -42,7 +42,7 @@ def my_semafore(thread_number):
     semafore.acquire()
     print(f"{thread_number} -- access granted ...")
     # do some work here 
-    time.sleep(10)
+    time.sleep(10) 
     print(f"{thread_number} -- release sequence ...")
     semafore.release()
 
