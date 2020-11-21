@@ -1,4 +1,3 @@
-import threading
 from threading import Event, Thread
 event = Event()
 
