@@ -35,16 +35,19 @@ def my_halve():
 
 
 semafore = threading.BoundedSemaphore(value=5)
-
+id = 0
 
 def my_semafore(thread_number):
-    print(f"{thread_number} -- getting access ...")
+    global id
+    print(f"{thread_number} -- getting access \t <-- {id}")
+    id += 1
     semafore.acquire()
-    print(f"{thread_number} -- access granted ...")
-    # do some work here 
-    time.sleep(10) 
-    print(f"{thread_number} -- release sequence ...")
+    print(f"{thread_number} -- access granted \t>!<")
+    # do some work here
+    time.sleep(10)
+    print(f"{thread_number} -- release sequence \t--> {id}")
     semafore.release()
+    id -= 1
 
 
 if __name__ == "__main__":
