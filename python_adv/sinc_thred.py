@@ -63,7 +63,7 @@ def event_my():
 
     # working here
     print("event is happent , now working ... ")
-    time.sleep(5)
+    
 
 
 if __name__ == "__main__":
@@ -77,8 +77,9 @@ if __name__ == "__main__":
     #     t.start()
     #     time.sleep(1)
 
-    # Events and Daemon Threads
 
+    # Events and Daemon Threads
+    """ event will .wait() till .set() not activated  """
     t1 = threading.Thread(target=event_my)
     t1.start()
 
