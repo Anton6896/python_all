@@ -11,6 +11,8 @@ one thread at the time can access resource
 
 lock = threading.Lock()
 
+# threading
+
 
 def my_double():
     global x, lock
@@ -34,11 +36,13 @@ def my_halve():
     lock.release()
 
 
-semafore = threading.BoundedSemaphore(value=5)
-id = 0
+id = 1
+
 
 def my_semafore(thread_number):
+    semafore = threading.BoundedSemaphore(value=5)
     global id
+
     print(f"{thread_number} -- getting access \t <-- {id}")
     id += 1
     semafore.acquire()
@@ -50,13 +54,33 @@ def my_semafore(thread_number):
     id -= 1
 
 
+event = threading.Event()
+
+
+def event_my():
+    print("waiting for event")
+    event.wait()
+
+    # working here
+    print("event is happent , now working ... ")
+    time.sleep(5)
+
+
 if __name__ == "__main__":
     # t1 = threading.Thread(target=my_double)
     # t2 = threading.Thread(target=my_halve)
     # t1.start()
     # t2.start()
 
-    for thread_number in range(1,11):
-        t = threading.Thread(target=my_semafore, args=(thread_number, ))
-        t.start()
-        time.sleep(1)
+    # for thread_number in range(1,11):
+    #     t = threading.Thread(target=my_semafore, args=(thread_number, ))
+    #     t.start()
+    #     time.sleep(1)
+
+    # Events and Daemon Threads
+
+    t1 = threading.Thread(target=event_my)
+    t1.start()
+
+    if (input("\nenter y / n ") == 'y'):
+        event.set()
