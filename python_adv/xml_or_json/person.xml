@@ -1,0 +1,21 @@
+<group>
+    <person id="1">
+        <age>23</age>
+        <weight>12</weight>
+        <name>Mike Smith</name>
+    </person>
+
+    <person id="2">
+        <age>27</age>
+        <weight>45</weight>
+        <name>jon Smith</name>
+    </person>
+
+    <person id="3">
+        <age>34</age>
+        <weight>165</weight>
+        <name>bob big</name>
+    </person>
+
+</group>
+
