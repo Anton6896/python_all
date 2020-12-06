@@ -1,0 +1,19 @@
+2020-11-27 16:51:33,769 - DEBUG - get path to the driver
+2020-11-27 16:51:34,783 - DEBUG - POST http://127.0.0.1:63696/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "platformName": "any", "goog:chromeOptions": {"extensions": [], "args": []}}}, "desiredCapabilities": {"browserName": "chrome", "version": "", "platform": "ANY", "goog:chromeOptions": {"extensions": [], "args": []}}}
+2020-11-27 16:51:34,784 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:63696
+2020-11-27 16:51:37,280 - DEBUG - http://127.0.0.1:63696 "POST /session HTTP/1.1" 200 715
+2020-11-27 16:51:37,280 - DEBUG - Finished Request
+2020-11-27 16:51:37,280 - DEBUG - using driver
+2020-11-27 16:51:37,280 - DEBUG - POST http://127.0.0.1:63696/session/75d7d94403e7791b32262031bcb77dfe/url {"url": "https://sites.google.com/a/chromium.org/chromedriver/help/clicking-issues"}
+2020-11-27 16:51:38,597 - DEBUG - http://127.0.0.1:63696 "POST /session/75d7d94403e7791b32262031bcb77dfe/url HTTP/1.1" 200 14
+2020-11-27 16:51:38,598 - DEBUG - Finished Request
+2020-11-27 16:51:38,598 - DEBUG - POST http://127.0.0.1:63696/session/75d7d94403e7791b32262031bcb77dfe/element {"using": "xpath", "value": "//*[@id=\"COMP_7221429159399122\"]/div/ul/li[2]/div/a"}
+2020-11-27 16:51:38,606 - DEBUG - http://127.0.0.1:63696 "POST /session/75d7d94403e7791b32262031bcb77dfe/element HTTP/1.1" 200 88
+2020-11-27 16:51:38,606 - DEBUG - Finished Request
+2020-11-27 16:51:38,606 - DEBUG - POST http://127.0.0.1:63696/session/75d7d94403e7791b32262031bcb77dfe/element/168967be-0186-4e8c-a8a9-2c80b177e2b0/click {"id": "168967be-0186-4e8c-a8a9-2c80b177e2b0"}
+2020-11-27 16:51:39,177 - DEBUG - http://127.0.0.1:63696 "POST /session/75d7d94403e7791b32262031bcb77dfe/element/168967be-0186-4e8c-a8a9-2c80b177e2b0/click HTTP/1.1" 200 14
+2020-11-27 16:51:39,177 - DEBUG - Finished Request
+2020-11-27 16:51:39,177 - DEBUG - exit driver
+2020-11-27 16:51:44,178 - DEBUG - DELETE http://127.0.0.1:63696/session/75d7d94403e7791b32262031bcb77dfe {}
+2020-11-27 16:51:44,198 - DEBUG - http://127.0.0.1:63696 "DELETE /session/75d7d94403e7791b32262031bcb77dfe HTTP/1.1" 200 14
+2020-11-27 16:51:44,198 - DEBUG - Finished Request

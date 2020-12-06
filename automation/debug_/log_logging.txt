@@ -1,0 +1,21 @@
+2020-11-24 16:34:29,448 - DEBUG - start code 
+2020-11-24 16:34:29,448 - DEBUG - start fac  :
+2020-11-24 16:34:29,448 - DEBUG - in loop tot : 1
+2020-11-24 16:34:29,448 - DEBUG - in loop tot : 2
+
+2020-11-25 11:16:35,490 - DEBUG - start code 
+2020-11-25 11:16:35,491 - DEBUG - start fac  :
+2020-11-25 11:16:35,491 - DEBUG - in loop tot : 1
+2020-11-25 11:16:35,491 - DEBUG - in loop tot : 2
+2020-11-25 11:16:35,491 - DEBUG - in loop tot : 6
+2020-11-25 11:16:35,491 - DEBUG - in loop tot : 24
+2020-11-25 11:16:35,491 - DEBUG - in loop tot : 120
+2020-11-25 11:16:35,491 - DEBUG - end code
+2020-11-25 11:16:36,888 - DEBUG - start code 
+2020-11-25 11:16:36,888 - DEBUG - start fac  :
+2020-11-25 11:16:36,888 - DEBUG - in loop tot : 1
+2020-11-25 11:16:36,888 - DEBUG - in loop tot : 2
+2020-11-25 11:16:36,888 - DEBUG - in loop tot : 6
+2020-11-25 11:16:36,888 - DEBUG - in loop tot : 24
+2020-11-25 11:16:36,888 - DEBUG - in loop tot : 120
+2020-11-25 11:16:36,888 - DEBUG - end code

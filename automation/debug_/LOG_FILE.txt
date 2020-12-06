@@ -1,0 +1,15 @@
+
+NoneType: None
+NoneType: None
+NoneType: None
+NoneType: None
+NoneType: None
+NoneType: None
+NoneType: None
+NoneType: None
+ symbol must be the 1 length ! 
+ symbol must be the 1 length ! 
+ symbol must be the 1 length ! 
+ symbol must be the 1 length ! 
+ symbol must be the 1 length !!! 
+ symbol must be the 1 length !!! 
