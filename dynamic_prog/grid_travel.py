@@ -1,5 +1,7 @@
 
 def gt():
+    # count the ways to travel in griad (top left -> down right)
+    
     pass
 
 
