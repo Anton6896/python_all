@@ -1,6 +1,12 @@
 
+"""
+well the recept is make this work in recursion tree 
+and then adjust memoization as optimization way 
+"""
+
+
 def fib(n: int) -> int:
-    #! the regular approach
+    # the regular approach
     if n <= 2:
         return 1
     return fib(n-1) + fib(n-2)
