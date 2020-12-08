@@ -18,7 +18,9 @@ def one(arr: list, target: int) -> bool:  # brut force
     return False
 
 
-def mem_one(arr: list, target: int, memo={}):  # memozing
+def mem_one(arr: list, target: int, memo={}) -> bool:  # memozing
+    # O(arr*target) -> time 
+    # O(target) -> space
     if target in memo:
         return memo[target]
     elif target == 0:
@@ -35,10 +37,14 @@ def mem_one(arr: list, target: int, memo={}):  # memozing
     memo[target] = False
     return False
 
+def get_all_num() -> list:
+    pass
+
 
 if __name__ == "__main__":
 
     # print(f"find sum : {one([2, 4], 7)}")           # false
     # print(f"find sum : {one([5, 3, 4, 7], 7)}")     # true
-    # print(f"find sum : {one([2, 3], 7)}")           # true
-    print(f"find sum : {mem_one([7, 14], 300)}")           # False
+    # print(f"find sum : {one([7, 14], 300)}")           # False (too match time)
+    # print(f"find sum : {mem_one([7, 14], 301)}")           # true
+    pass
