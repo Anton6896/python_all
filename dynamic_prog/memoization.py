@@ -62,5 +62,3 @@ if __name__ == "__main__":
     print(f'the memo way tester {gt_plus(2,2)}')
     print(f'the memo way tester {gt_plus(5,4)}')
     print(f'the memo way tester {gt_plus(18,18)}')
-
-    #  eds
