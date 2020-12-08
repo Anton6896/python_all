@@ -47,6 +47,7 @@ def get_options(target: int, arr: list) -> list:
 
     for i in arr:
         target_r = target - i
+
         option = get_options(target_r, arr)
         if option != None:
             option.append(i)
@@ -55,8 +56,7 @@ def get_options(target: int, arr: list) -> list:
     return None
 
 
-def get_options_memo(target: int, arr: list, memo={}) -> list:
-    # time : O(target * arr)
+def get_options_memo(target: int, arr: list, memo=dict) -> list:
     if target in memo:
         return memo[target]
     elif target == 0:
@@ -69,7 +69,8 @@ def get_options_memo(target: int, arr: list, memo={}) -> list:
 
         option = get_options_memo(target_r, arr, memo)
         if option != None:
-            memo[target] = option.append(i)
+            option.append(i)
+            memo[target] = option
             return memo[target]
 
     memo[target] = None
@@ -80,13 +81,13 @@ if __name__ == "__main__":
     # print(f"find sum : {one([2, 4], 7)}")  # false
     # print(f"find sum : {one([5, 3, 4, 7], 7)}")  # true
     # print(f"find sum : {one([7, 14], 300)}") # False (too match time)
-    print(f"find sum : {mem_one([7, 14], 301)}")  # true
-    print(f"find sum : {mem_one([5, 3, 4, 7], 7)}")  # true
+    print(f"find sum : {mem_one([7, 14], 301, {})}")  # true
+    print(f"find sum : {mem_one([5, 3, 4, 7], 7, {})}")  # true
     print()
     print(f'arr : {get_options(7, [2,3])}')  # ok
     print(f'arr : {get_options(7, [5,3,4,7])}')  # ok
     print(f'arr : {get_options(7, [2,4])}')  # None
     print()
-    print(f'mem arr : {get_options_memo(7, [5,3,4,7])}')
-    print(f'mem arr : {get_options_memo(7, [2,3])}')
-    print(f'mem arr : {get_options_memo(301, [7,14])}')
+    print(f'mem arr : {get_options_memo(7, [5,3,4,7], {})}')
+    print(f'mem arr : {get_options_memo(7, [2,3], {})}')
+    print(f'mem arr : {get_options_memo(301, [7,14], {})}')
