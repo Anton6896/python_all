@@ -1,6 +1,9 @@
 
 
+<<<<<<< HEAD
 from numpy import *
+=======
+>>>>>>> da3657c84c252fb63af7d3ab71f91d3323853783
 from typing import NoReturn
 
 
