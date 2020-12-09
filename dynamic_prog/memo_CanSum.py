@@ -91,12 +91,12 @@ def bestSum(target: int, arr: list) -> list:
 
     for num in arr:
         target_r = target - num
+        option = bestSum(target_r, arr) # put to stack 
 
-        option = bestSum(target_r, arr)
-        if option is not None:  # option is list
-            option.append(num)
+        if option is not None:  # if option is list
+            option.append(num)  # get from stack 
             if shortestCombination is None or len(option) < len(shortestCombination):
-                shortestCombination = option
+                shortestCombination = option # alias
 
     return shortestCombination
 
