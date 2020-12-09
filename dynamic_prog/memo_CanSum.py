@@ -1,6 +1,8 @@
 from numpy import copy
 
 
+
+#* actual question can you do that ( find the number ) =============================
 def one(arr: list, target: int) -> bool:  # brute force
     # if it passible to generate some number
     # by using an given array
@@ -39,6 +41,7 @@ def mem_one(arr: list, target: int, memo: dict) -> bool:  # memozing
     return False
 
 
+#* question if you can do it show me how you did that ( return list of numbers )  =============================
 def get_options(target: int, arr: list) -> list:
     # time : O(arr^target * target)
     # size : O(target^2)
@@ -80,6 +83,7 @@ def get_options_memo(target: int, arr: list, memo: dict) -> list or None:
     return None
 
 
+#* optimize the last question (show me the smallest option for this task  )  =============================
 def bestSum(target: int, arr: list) -> list:
     # get the smallest arr that in sum return target
     if target == 0:
@@ -136,14 +140,17 @@ if __name__ == "__main__":
     # print(f"find sum : {one([7, 14], 300)}") # False (too match time)
     # print(f"find sum : {mem_one([7, 14], 301, {})}")  # true
     # print(f"find sum : {mem_one([5, 3, 4, 7], 7, {})}")  # true
+
     # print()
     # print(f'arr : {get_options(7, [2,3])}')  # ok
     # print(f'arr : {get_options(7, [5,3,4,7])}')  # ok
     # print(f'arr : {get_options(7, [2,4])}')  # None
+
     # print()
     # print(f'mem arr : {get_options_memo(7, [5,3,4,7], {})}')
     # print(f'mem arr : {get_options_memo(7, [2,3], {})}')
     # print(f'mem arr : {get_options_memo(301, [7,14], {})}')
+
     print(f"\nbest sum : {bestSum(7,[5,3,4,7])}")
     print(f"best sum : {bestSum(8,[2,3,5])}")
     print(f"best sum : {bestSum(8,[1,4,5])}")
