@@ -57,8 +57,11 @@ if __name__ == "__main__":
     # )
 
     print(
-        f"can concat: {can_constract_memo('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'], {})}"
+        f"can concat: {can_constract_memo('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'], {})}"
     )
     print(
         f"can concat : {can_constract_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd'], {})}"
     )
+
+
+    
