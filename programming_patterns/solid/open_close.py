@@ -81,7 +81,7 @@ class AndSpecification(Specifications):
 
 
 class BetterFilter(Filter):
-    def filter(self, items: list, spec: Specifications) -> Product:
+    def filter(self, items: list, spec: Specifications) -> list:
         for item in items:
             if spec.is_satisfied(item):
                 yield item
@@ -113,7 +113,8 @@ if __name__ == "__main__":
     #     ColorSpecification(Color.GREEN)
     # )
 
-    # redefine __and__ , __or__ at Specification class
+    # redefine __and__ <=> & , __or__ at Specification class
+    # in Python you can overload & operator 
     large_green = large & ColorSpecification(Color.GREEN)
     samall_or_red = SizeSpecification(
         Size.SMALL) or ColorSpecification(Color.RED)
