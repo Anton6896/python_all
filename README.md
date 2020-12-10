@@ -7,3 +7,6 @@ https://www.youtube.com/watch?v=2S7Xxz9PhaU&list=PL7yh-TELLS1F3KytMVZRFO-xIo_S2_
 # Dynamic programing approach (freeCodeCamp.org)
 https://www.youtube.com/watch?v=oBt53YbR9Kk&list=WL&index=2&t=1407s&ab_channel=freeCodeCamp.org
 
+# Design patterns by Udemy course (Dmitri Nesteruk)
+"Design Patterns in Python" 
+

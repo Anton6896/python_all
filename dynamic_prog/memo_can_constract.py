@@ -34,7 +34,6 @@ def can_constract_memo(target: str, arr: list, memo=dict) -> bool:
             if can_constract_memo(suffix, arr, memo):
                 memo[target] = True
                 return True
-
         # not an python way
         # if target.index(word) == 0:
         #     suffix = target[len(word):]
@@ -120,7 +119,7 @@ if __name__ == "__main__":
     )
 
     print(
-        f"can concat:\n {all_construct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'], {})}"
+        f"can concat:\n {all_construct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeh',['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'], {})}"
     )
 
     print(
