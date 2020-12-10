@@ -1,4 +1,3 @@
-import os
 import pathlib
 
 """
@@ -8,6 +7,8 @@ solid design principles (Robert C Martin)
 3.
 4.
 5.
+
+!! do not make god objects !!
 """
 
 
