@@ -53,7 +53,7 @@ def gt_plus(r, c, memo={}) -> int:
 
 
 if __name__ == "__main__":
-    print(f"fibonacci : {fib_2(100)}")
+    print(f"fibonacci : {fib_2(6)}")
 
     # print(f'the regular tester {gt(3,3)}')
     # print(f'the regular tester {gt(2,2)}')
