@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from enum import Enum
 
 
@@ -22,15 +23,17 @@ class Car:
     def __str__(self):
         return self.name
 
-# specification pattern
+# specification enterprice pattern
 
 
 class Specification:
+    @abstractmethod
     def is_satisfied(self, item: Car):
         pass
 
 
 class Filter:
+    @abstractmethod
     def filter(self, items: list, spec: Specification):
         pass
 
