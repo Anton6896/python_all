@@ -14,12 +14,30 @@ def fib(n: int) -> int:
     return arr[n]
 
 
-def grid_traveler(m: int, n: int) -> int:
-    # how many ways to path thru the greed 
+# -------------------------    grid traveler
+
+def grid_traveler(x: int, y: int) -> int:
+    # how many ways to path thru the greed
+
+    # check if numbers are different
     
-    pass
+
+    grid = [[0 for x in range(x+2)]
+            for y in range(y+2)]  # 2d arr x*y filled by 0  (+2 for place safety )
+    grid[1][1] = 1
+
+    for j in range(0, y+1):
+        for i in range(0, x+1):
+            grid[i+1][j] += grid[i][j]
+            grid[i][j+1] += grid[i][j]
+
+    return grid[x][y]
 
 
 if __name__ == "__main__":
-    print(f"fibionachi 6 : {fib(6)}")
-    print(f"fibionachi 50 : {fib(50)}")
+    print(f"fibionachi ::  6 : {fib(6)}")
+    print(f"fibionachi ::  50 : {fib(50)}")
+    print()
+
+    print(f"grid ::  ways to end : {grid_traveler(3,2)}")
+    print(f"grid ::  ways to end : {grid_traveler(18,18)}")
