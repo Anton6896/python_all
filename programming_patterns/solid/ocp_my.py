@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from enum import Enum
 
 
@@ -23,16 +23,15 @@ class Car:
     def __str__(self):
         return self.name
 
-# specification enterprice pattern
 
-
-class Specification:
+class Specification(ABC):
+    ### specification enterprice pattern
     @abstractmethod
     def is_satisfied(self, item: Car):
         pass
 
 
-class Filter:
+class Filter(ABC):
     @abstractmethod
     def filter(self, items: list, spec: Specification):
         pass
@@ -60,6 +59,7 @@ class AndSpec(Specification):
 
     def is_satisfied(self, car: Car) -> bool:
         return all(map(
+            ## args will be an list of cars 
             lambda x: x.is_satisfied(car), self.args
         ))
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     four = two = ByTireSpec(Tier.FOUR)
     red = ByColorSpec(Color.RED)
 
-    # lookup 
+    # lookup
     print('car with 4 tires : ')
     for car in my_filter.filter(my_cars, four):
         print(car)
