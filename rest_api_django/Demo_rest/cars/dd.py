@@ -14,7 +14,7 @@ def get_list():
 
 
 def del_car():
-    url = "http://127.0.0.1:8001/api/v1/cars/update_car/3/"
+    url = "http://127.0.0.1:8001/api/v1/cars/update_car/2/"
 
     payload = {}
     headers = {}
@@ -25,4 +25,5 @@ def del_car():
 
 
 if __name__ == "__main__":
-    get_list()
+    # get_list()
+    del_car()
