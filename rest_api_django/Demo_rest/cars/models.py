@@ -12,8 +12,11 @@ class Car (models.Model):
     CAR_TYPES = (
         (1, 'type_one'),
         (2, 'type_two'),
-        (1, 'type_three')
+        (3, 'type_three')
     )
     car_type = models.IntegerField(verbose_name='Car_type', choices=CAR_TYPES)
     user = models.ForeignKey(User, verbose_name="User",
                              on_delete=models.CASCADE)
+
+    
+
