@@ -19,7 +19,4 @@ class Car (models.Model):
     user = models.ForeignKey(User, verbose_name="User",
                              on_delete=models.CASCADE)
 
-    # create the permission to edit and etc check
-    owner = models.ForeignKey(
-        User, related_name='snippets', on_delete=models.CASCADE)
 

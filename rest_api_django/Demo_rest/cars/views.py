@@ -1,11 +1,15 @@
 from rest_framework import generics, permissions
 from .serializers import CarDetailSerializer, CarListSerializer
 from .models import Car
+from .permissions import IsOwnerOrReadOnly
 
 
 class CarCreationView(generics.CreateAPIView):
     serializer_class = CarDetailSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class CarListView(generics.ListAPIView):
@@ -29,4 +33,4 @@ class CarByColor(generics.ListAPIView):
 class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CarDetailSerializer  # build in class
     queryset = Car.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
