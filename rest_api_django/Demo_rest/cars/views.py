@@ -20,7 +20,7 @@ class CarListView(generics.ListAPIView):
 class CarByColor(generics.ListAPIView):
     serializer_class = CarListSerializer
 
-    # http://127.0.0.1:8001/api/v1/cars/color_car/?q=green
+    # http://127.0.0.1:8000/api/v1/cars/color_car/?q=green
     def get_queryset(self):
         if self.request.method == 'GET':
             queryset = Car.objects.all()

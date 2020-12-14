@@ -59,4 +59,6 @@ if __name__ == "__main__":
 
     corey_pl = "https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p"
     test_pl = "https://www.youtube.com/playlist?list=PL7yh-TELLS1EgOLIPo1sVuf_rDPEp33S8"
-    # down_play_list_youtube(test_pl)
+    rest_pl = "https://www.youtube.com/playlist?list=PL8GFhcuc_fW4cxdkRtWIlln1DQ3CZwQen"
+    down_play_list_youtube(rest_pl)
+
