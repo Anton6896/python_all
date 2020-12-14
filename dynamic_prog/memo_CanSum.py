@@ -1,8 +1,8 @@
-from numpy import copy
 
 
+# * actual question can you do that ( find the number ) =============================
 
-#* actual question can you do that ( find the number ) =============================
+
 def one(arr: list, target: int) -> bool:  # brute force
     # if it passible to generate some number
     # by using an given array
@@ -41,7 +41,7 @@ def mem_one(arr: list, target: int, memo: dict) -> bool:  # memozing
     return False
 
 
-#* question if you can do it show me how you did that ( return list of numbers )  =============================
+# * question if you can do it show me how you did that ( return list of numbers )  =============================
 def get_options(target: int, arr: list) -> list:
     # time : O(arr^target * target)
     # size : O(target^2)
@@ -72,18 +72,18 @@ def get_options_memo(target: int, arr: list, memo: dict) -> list or None:
 
     for i in arr:
         target_r = target - i
-        option = get_options_memo(target_r, arr, memo)
+        option = get_options_memo(target_r, arr, memo)  # list 
 
         if option != None:
             option.append(i)
             memo[target] = option
-            return memo[target]
+            return option
 
     memo[target] = None
     return None
 
 
-#* optimize the last question (show me the smallest option for this task  )  =============================
+# * optimize the last question (show me the smallest option for this task  )  =============================
 def bestSum(target: int, arr: list) -> list:
     # get the smallest arr that in sum return target
     if target == 0:
@@ -95,12 +95,12 @@ def bestSum(target: int, arr: list) -> list:
 
     for num in arr:
         target_r = target - num
-        option = bestSum(target_r, arr) # put to stack 
+        option = bestSum(target_r, arr)  # put to stack
 
         if option is not None:  # if option is list
-            option.append(num)  # get from stack 
+            option.append(num)  # get from stack
             if shortestCombination is None or len(option) < len(shortestCombination):
-                shortestCombination = option # alias
+                shortestCombination = option  # alias
 
     return shortestCombination
 
@@ -121,10 +121,11 @@ def best_sum_memo(target: int, arr: list, memo: dict) -> list or None:
 
     for num in arr:
         target_r = target - num
-        option = best_sum_memo(target_r, arr, memo)
+        option = best_sum_memo(target_r, arr, memo)  # return array
 
-        if option is not None:  # option is list
+        if option is not None:
             option.append(num)
+            # if not exists create, else conpare
             if (shortest_combination is None) or (len(option) < len(shortest_combination)):
                 shortest_combination = option.copy()  # deep copy
 
@@ -148,7 +149,7 @@ if __name__ == "__main__":
 
     # print()
     # print(f'mem arr : {get_options_memo(7, [5,3,4,7], {})}')
-    # print(f'mem arr : {get_options_memo(7, [2,3], {})}')
+    print(f'get option memo : {get_options_memo(7, [2,3], {})}')
     # print(f'mem arr : {get_options_memo(301, [7,14], {})}')
 
     print(f"\nbest sum : {bestSum(7,[5,3,4,7])}")
