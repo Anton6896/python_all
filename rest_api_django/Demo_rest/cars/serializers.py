@@ -5,6 +5,8 @@ from .models import Car
 
 
 class CarDetailSerializer(serializers.ModelSerializer):
+    # on crete connect tu user
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Car
@@ -16,7 +18,3 @@ class CarListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = ('id', 'vin', 'user', 'color')
-
-
-
-

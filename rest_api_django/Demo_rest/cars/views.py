@@ -5,6 +5,7 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class CarCreationView(generics.CreateAPIView):
+    # http://127.0.0.1:8000/api/v1/cars/create_car
     serializer_class = CarDetailSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -13,24 +14,26 @@ class CarCreationView(generics.CreateAPIView):
 
 
 class CarListView(generics.ListAPIView):
+    # http://127.0.0.1:8000/api/v1/cars/list_car/
     serializer_class = CarListSerializer
     queryset = Car.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class CarByColor(generics.ListAPIView):
-    serializer_class = CarListSerializer
-
     # http://127.0.0.1:8000/api/v1/cars/color_car/?q=green
+    serializer_class = CarListSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
     def get_queryset(self):
         if self.request.method == 'GET':
-            queryset = Car.objects.all()
-            q = self.request.GET.get('q', None)
+            q = self.request.GET.get('q', None)  # get color ?q=green
             if q is not None:
-                queryset = queryset.filter(color=q)
-            return queryset
+                return Car.objects.filter(color=q).all()
 
 
 class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # http://127.0.0.1:8000/api/v1/cars/update_car/1
     serializer_class = CarDetailSerializer  # build in class
     queryset = Car.objects.all()
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]

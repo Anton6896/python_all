@@ -19,7 +19,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # http://127.0.0.1:8000/api-auth/login/
+    # http://127.0.0.1:8000/api-auth/logout/
     path('api-auth/', include('rest_framework.urls')),
+    
     # style for api :
     path('api/v1/cars/', include('cars.urls'))
 ]
