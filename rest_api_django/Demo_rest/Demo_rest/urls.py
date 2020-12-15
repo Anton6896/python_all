@@ -25,5 +25,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     
     # style for api :
-    path('api/v1/cars/', include('cars.urls'))
+    path('api/v1/cars/', include('cars.urls')),
+
+    path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/auth_token/', include('djoser.urls.authtoken')),
+
 ]

@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'cars',
     'oauth2_provider',
+    'djoser',  # user integration (cru)
+    'rest_framework.authtoken',
+
+
 
 
 ]
@@ -126,12 +130,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
+
 }

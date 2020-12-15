@@ -3,6 +3,7 @@ from .serializers import CarDetailSerializer, CarListSerializer
 from .models import Car
 from .permissions import IsOwnerOrReadOnly
 
+# ############  crud section 
 
 class CarCreationView(generics.CreateAPIView):
     # http://127.0.0.1:8000/api/v1/cars/create_car
@@ -37,3 +38,6 @@ class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CarDetailSerializer  # build in class
     queryset = Car.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
+
+ 
+# ############ user section 
