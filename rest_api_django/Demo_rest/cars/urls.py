@@ -12,4 +12,5 @@ urlpatterns = [
     path('color_car/', CarByColor.as_view()),  # ?q=green
     path('update_car/<int:pk>/', CarDetailView.as_view()),
 
+
 ]

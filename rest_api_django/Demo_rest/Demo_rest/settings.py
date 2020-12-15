@@ -38,13 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
     'cars',
-    'oauth2_provider',
-    'djoser',  # user integration (cru)
-    'rest_framework.authtoken',
 
-
+    'rest_framework',
+    'rest_framework.authtoken',  # user auth
+    'djoser',  # user auth
 
 
 ]
@@ -133,9 +131,11 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework.permissions.IsAuthenticated',
+
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -143,5 +143,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ]
+}
 
+DJOSER = {
+    "USER_ID_FIELD": "username"
 }

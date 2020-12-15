@@ -19,4 +19,6 @@ class Car (models.Model):
     user = models.ForeignKey(User, verbose_name="User",
                              on_delete=models.CASCADE)
 
+    
+
 
