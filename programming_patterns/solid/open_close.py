@@ -1,7 +1,7 @@
 """
 solid design principles (Robert C Martin)
-1. srp -> singel responsibility for object 
-2. ocp -> open close principeles 
+1. srp -> singel responsibility for object
+2. ocp -> open close principeles
 3.
 4.
 5.
@@ -45,8 +45,8 @@ class Specifications:
     def __and__(self, other):
         return AndSpecification(self, other)
 
-    # def __or__(self, other):
-    #     return AndSpecification(self, other)
+    def __or__(self, other):
+        return AndSpecification(self, other)
 
 
 class Filter:
@@ -93,29 +93,26 @@ class BetterFilter(Filter):
 
 if __name__ == "__main__":
 
-    green = ColorSpecification(Color.GREEN)
-    large = SizeSpecification(Size.LARGE)
-    small = SizeSpecification(Size.SMALL)
-    red = ColorSpecification(Color.RED)
+    green_spec = ColorSpecification(Color.GREEN)
+    red_spec = ColorSpecification(Color.RED)
+    small_spec = SizeSpecification(Size.SMALL)
+    large_spec = SizeSpecification(Size.LARGE)
 
-    apple = Product('Apple', green, small)
-    tree = Product('Tree', green, large)
-    house = Product('House', red, large)
+    apple = Product('Apple', Color.GREEN, Size.SMALL)
+    tree = Product('Tree', Color.GREEN, Size.LARGE)
+    house = Product('House', Color.RED, Size.LARGE)
 
-    my_products = [
-        apple, tree, house
-    ]
+    my_products = (apple, tree, house)
 
     bf = BetterFilter()
 
+    print("green products :" , end=" ")
+    for p in bf.filter(my_products, green_spec):
+        print(p, end=" ,")
 
-    print("green products :")
-    for p in bf.filter(my_products, green):
-        print(p)  # apple , tree
-
-    print("large size :")
-    for p in bf.filter(my_products, large):
-        print(p)
+    print("\nlarge size :", end=" ")
+    for p in bf.filter(my_products, large_spec):
+        print(p, end=" , ")
 
     # print("large and green : ")
     # large_green = AndSpecification(
@@ -124,13 +121,15 @@ if __name__ == "__main__":
     # )
 
     # redefine __and__ <=> & , __or__ at Specification class
-    large_green = large & green
-    samall_or_red = small or red
+    large_green = large_spec & green_spec
+    samall_or_red = small_spec or red_spec
 
-    print("large and green : ")
+    print("\nlarge and green : ", end=" ")
     for p in bf.filter(my_products, large_green):
-        print(p)
+        print(p, end=" , ")
 
-    print("small or red : ")
+    print("\nsmall or red : ", end=" ")
     for p in bf.filter(my_products, samall_or_red):
-        print(p)
+        print(p, end=" , ")
+
+    print()
