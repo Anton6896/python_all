@@ -21,6 +21,8 @@ class Size(Enum):
     MEDIUM = 2
     LARGE = 3
 
+# ========================================================================
+
 
 class Product:
     def __init__(self, name, color, size):
@@ -43,8 +45,8 @@ class Specifications:
     def __and__(self, other):
         return AndSpecification(self, other)
 
-    def __or__(self, other):
-        return AndSpecification(self, other)
+    # def __or__(self, other):
+    #     return AndSpecification(self, other)
 
 
 class Filter:
@@ -52,13 +54,15 @@ class Filter:
     def filter(self, item: Product, spec: Specifications):
         pass
 
+# ========================================================================
+
 
 class ColorSpecification(Specifications):
     def __init__(self, color):
         self.color = color
 
     def is_satisfied(self, item: Product) -> bool:
-        return item.color == self.color
+        return self.color == item.color
 
 
 class SizeSpecification(Specifications):
@@ -66,7 +70,7 @@ class SizeSpecification(Specifications):
         self.size = size
 
     def is_satisfied(self, item: Product) -> bool:
-        return item.size == self.size
+        return self.size == item.size
 
 
 class AndSpecification(Specifications):
@@ -88,36 +92,45 @@ class BetterFilter(Filter):
 
 
 if __name__ == "__main__":
-    apple = Product('Apple', Color.GREEN, Size.SMALL)
-    tree = Product('Tree', Color.GREEN, Size.LARGE)
-    house = Product('House', Color.RED, Size.LARGE)
+
+    green = ColorSpecification(Color.GREEN)
+    large = SizeSpecification(Size.LARGE)
+    small = SizeSpecification(Size.SMALL)
+    red = ColorSpecification(Color.RED)
+
+    apple = Product('Apple', green, small)
+    tree = Product('Tree', green, large)
+    house = Product('House', red, large)
 
     my_products = [
         apple, tree, house
     ]
 
     bf = BetterFilter()
-    green = ColorSpecification(Color.GREEN)
+
+
     print("green products :")
     for p in bf.filter(my_products, green):
         print(p)  # apple , tree
 
-    large = SizeSpecification(Size.LARGE)
     print("large size :")
     for p in bf.filter(my_products, large):
         print(p)
 
-    print("large and green : ")
+    # print("large and green : ")
     # large_green = AndSpecification(
     #     SizeSpecification(Size.LARGE),
     #     ColorSpecification(Color.GREEN)
     # )
 
     # redefine __and__ <=> & , __or__ at Specification class
-    # in Python you can overload & operator 
-    large_green = large & ColorSpecification(Color.GREEN)
-    samall_or_red = SizeSpecification(
-        Size.SMALL) or ColorSpecification(Color.RED)
+    large_green = large & green
+    samall_or_red = small or red
 
+    print("large and green : ")
+    for p in bf.filter(my_products, large_green):
+        print(p)
+
+    print("small or red : ")
     for p in bf.filter(my_products, samall_or_red):
         print(p)
