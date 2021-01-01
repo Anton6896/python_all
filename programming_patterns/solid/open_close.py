@@ -36,17 +36,16 @@ class Product:
 
 class Specifications:
     # Specification is Enterprice pattern !
-    # than working under the OCP .
-    # Base class
     def is_satisfied(self, item: Product):
         pass
 
-    # redefine and , or
     def __and__(self, other):
-        return AndSpecification(self, other)
+        return CombinatorSpecification(self, other)
 
     def __or__(self, other):
-        return AndSpecification(self, other)
+        # python will understand the difference in __or__ method by its self
+        # so sending to same combinator class
+        return CombinatorSpecification(self, other)
 
 
 class Filter:
@@ -73,14 +72,15 @@ class SizeSpecification(Specifications):
         return self.size == item.size
 
 
-class AndSpecification(Specifications):
+class CombinatorSpecification(Specifications):
     def __init__(self, *args):
+        # args -> list of specifications
         self.args = args
 
     def is_satisfied(self, item: Product) -> bool:
         # all check all value (size , color ...) if true return it
         return all(map(
-            lambda x: x.is_satisfied(item), self.args
+            lambda spec: spec.is_satisfied(item), self.args
         ))
 
 
@@ -91,6 +91,7 @@ class BetterFilter(Filter):
                 yield item
 
 
+# ========================================================================
 if __name__ == "__main__":
 
     green_spec = ColorSpecification(Color.GREEN)
@@ -100,25 +101,19 @@ if __name__ == "__main__":
 
     apple = Product('Apple', Color.GREEN, Size.SMALL)
     tree = Product('Tree', Color.GREEN, Size.LARGE)
-    house = Product('House', Color.RED, Size.LARGE)
+    house = Product('House', Color.BLUE, Size.LARGE)
 
     my_products = (apple, tree, house)
 
     bf = BetterFilter()
 
-    print("green products :" , end=" ")
+    print("green products :", end=" ")
     for p in bf.filter(my_products, green_spec):
         print(p, end=" ,")
 
     print("\nlarge size :", end=" ")
     for p in bf.filter(my_products, large_spec):
         print(p, end=" , ")
-
-    # print("large and green : ")
-    # large_green = AndSpecification(
-    #     SizeSpecification(Size.LARGE),
-    #     ColorSpecification(Color.GREEN)
-    # )
 
     # redefine __and__ <=> & , __or__ at Specification class
     large_green = large_spec & green_spec
@@ -132,4 +127,11 @@ if __name__ == "__main__":
     for p in bf.filter(my_products, samall_or_red):
         print(p, end=" , ")
 
-    print()
+    print("\nlarge and Blue : ", end=" ")
+    large_blue = CombinatorSpecification(
+        # manual adding &
+        SizeSpecification(Size.LARGE),
+        ColorSpecification(Color.BLUE)
+    )
+    for p in bf.filter(my_products, large_blue):
+        print(p)
