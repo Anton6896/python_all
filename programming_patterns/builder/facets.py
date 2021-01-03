@@ -3,6 +3,9 @@
 have an person obj (for this example)
 and have an 2 builders that have one main PersonBuilder
 interface for build person obj
+
+
+violet ocp
 """
 
 # =================================================  object to build
@@ -35,9 +38,12 @@ class PersonBuilder:  # user working with this class
             self.person = Person()
         else:
             self.person = person
-
+    """
     # getting data from couple classes (couple sources of data)
-
+    # but here is over the ocp principle so is you need to add 
+    # new @property here is you have some new data to add ! 
+    """
+    
     @property
     def lives(self):
         return PersonAddressBuilder(self.person)
