@@ -2,15 +2,15 @@
 """
 have an person obj (for this example)
 and have an 2 builders that have one main PersonBuilder
- interface for build person obj
+interface for build person obj
 """
 
+# =================================================  object to build
 
-class Person:
+
+class Person:  # person as some object for example
     def __init__(self) -> None:
         super().__init__()
-
-        print('creating instance of person .. ')
 
         # ADDRESS
         self.street_address = None
@@ -26,14 +26,17 @@ class Person:
         return f"Address: ({self.street_address}, {self.postcode}, {self.city})\n" +\
             f"Employment info: ({self.company_name}, {self.position}, {self.annual_income})"
 
+# =================================================   interface
 
-class PersonBuilder:
-    # interface class 
+
+class PersonBuilder:  # user working with this class
     def __init__(self, person=None) -> None:
         if person is None:
             self.person = Person()
         else:
             self.person = person
+
+    # getting data from couple classes (couple sources of data)
 
     @property
     def lives(self):
@@ -43,8 +46,14 @@ class PersonBuilder:
     def works(self):
         return PersonJobBuilder(self.person)
 
+    # permission to build obj ( person in this case )
+
     def build(self):
+        print('creating instance of person .. ')
         return self.person
+
+
+# =================================================  low level
 
 
 class PersonJobBuilder(PersonBuilder):
@@ -81,6 +90,7 @@ class PersonAddressBuilder(PersonBuilder):
         return self
 
 
+# =================================================  tester
 if __name__ == "__main__":
     pb = PersonBuilder()
     per1 = pb\
