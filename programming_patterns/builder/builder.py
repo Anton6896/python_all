@@ -58,7 +58,7 @@ class HtmlBuilder:
 
     def __init__(self, root_name):
         self.root_name = root_name
-        self.__root.name = root_name
+        self.__root.name = root_name  # crete first element in HtmlElement.elements
 
     # not fluent implementation
     def add_child(self, ch_name, ch_text):
@@ -72,9 +72,9 @@ class HtmlBuilder:
             HtmlElement(ch_name, ch_text)
         )
         return self
-
+    
     def __str__(self):
-        return str(self.__root)
+        return str(self.__root)  # run HtmlElement
 
     def clear(self):
         self.__root = HtmlElement(name=self.root_name)
