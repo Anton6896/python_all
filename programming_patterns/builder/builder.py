@@ -1,18 +1,21 @@
 """
 builder pattern 
 create an convenient way for creating conplicated objects 
-"""
 
+here is html text creator 
+from HtmlBuilder creates -> HtmlElement creation 
 
-def func_1():
-    # html constraction
+def create_html_text():
+    # html constraction for example 
     words = ['hello', 'world ']
     parts = ['<ul>']
 
     for w in words:
         parts.append(f'    <li>{w}</li>')
     parts.append('</li>')
+
     print('\n'.join(parts))
+"""
 
 
 class HtmlElement:
@@ -78,7 +81,6 @@ class HtmlBuilder:
 
 
 if __name__ == "__main__":
-    # func_1()
 
     # ordinary call
     builder = HtmlBuilder('ul')
