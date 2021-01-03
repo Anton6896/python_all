@@ -26,6 +26,7 @@ class HtmlElement:
 
     def __str(self, indent):
         lines = []
+
         i = " " * ((indent+1) * self.indent_size)  # i = 4 -> "    "
         lines.append(f"{i}<{self.name}>")
 
@@ -79,19 +80,19 @@ class HtmlBuilder:
 if __name__ == "__main__":
     # func_1()
 
-    # ordinary call 
+    # ordinary call
     builder = HtmlBuilder('ul')
-    builder = HtmlElement.create('ul')
+    # builder = HtmlElement.create('ul')
     builder.add_child('li', 'text 1')
     builder.add_child('li', 'text 2')
 
     print(f'ordinary builder \n{builder}')
 
-
-    # fluent call 
+    # fluent call
     print()
-    builder.clear()
+    builder.clear()   # first initialized name "<ul>"
     builder.add_child_fluent('li', 'hello') \
         .add_child_fluent('li', 'world')
+
     print('Fluent builder:')
     print(builder)
