@@ -28,7 +28,8 @@ class Point_1:
 if __name__ == "__main__":
     p1 = Point_1(12, 5)
     p2 = Point_1.factory.new_polar_point(3, 5)
+    p3 = Point_1.factory.new_cartesian_point(24, 54)
 
     print(
-        f"point : {p1} \npolar point {p2}"
+        f"point : {p1} \npolar point {p2}, cartesian: {p3}"
     )
