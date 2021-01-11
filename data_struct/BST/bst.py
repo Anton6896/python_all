@@ -2,6 +2,12 @@
 Binary search tree 
 using node class 
 
+> insert 
+> find 
+> remove 
+> is_empty
+> get_size
+
 """
 from Node import Node, my_counter
 
@@ -20,7 +26,7 @@ class Bst:
     def is_empty(self) -> bool:
         return self.get_size() == 0
 
-    def insert(self, d) -> bool:  # wrapper
+    def insert(self, d) -> bool:
         if self.root:
             return self.root.insert(d)
         else:
@@ -28,7 +34,7 @@ class Bst:
             self.size += 1
             return True
 
-    def find(self, d) -> Node:  # wrapper
+    def find(self, d) -> Node:  
         # return tuple 0=node. 1=parent
         if self.root:
             return self.root.find(d)
@@ -36,6 +42,8 @@ class Bst:
             return None
 
     def remove(self, d) -> bool:
+
+        # base cases ---------------------
         # tree is empty
         if not self.root:
             return False
@@ -44,6 +52,12 @@ class Bst:
         if (self.root.data == d) and (self.root.left is self.root.right is None):
             self.root = None
             return True
+        
+
+        # growing complexity 
+        obj = find(d)
+        node = obj[0]
+        node_parent = obj[1]
 
         """
         # node with d  -> is leaf
@@ -54,10 +68,6 @@ class Bst:
         check from which side node is on position 
         put None to this position return True
         """
-        obj = find(d)
-        node = obj[0]
-        node_parent = obj[1]
-
         if node.left is node.right is None:  # leaf
             if node_parent.left:
                 if node_parent.left.data == node.data:
@@ -69,6 +79,13 @@ class Bst:
                 return True
 
         
+        """
+        node that has one child (left or right)
+        because i am tracking parent node just 
+        adjust the pointer from parent to next child on line (for this case)
+        """
+
+
 
 
 
