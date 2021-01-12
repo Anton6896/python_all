@@ -1,19 +1,35 @@
-"""
-Binary search tree 
-using node class 
+from Node import Node, my_counter
+import os
+import sys
+import logging
+import pathlib
 
-> insert 
-> find 
-> remove 
+os.chdir(pathlib.Path(
+    __file__).parent.absolute())
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filename="log_logging.txt"
+)
+
+
+"""
+Binary search tree
+using node class
+
+> insert
+> find
+> remove
 > is_empty
 > get_size
 
 """
-from Node import Node, my_counter
 
 
 class Bst:
     def __init__(self, node=None) -> None:
+        logging.debug("---- >>>  new root created ... ")
         self.root = node
         self.size = 0
 
@@ -35,6 +51,7 @@ class Bst:
             return True
 
     def find(self, d) -> Node:
+        logging.debug(" ---- find module")
         # return tuple 0=node. 1=parent
         if self.root:
             return self.root.find(d)
@@ -42,6 +59,7 @@ class Bst:
             return None
 
     def smallest_node(self, new_root=None):
+        logging.debug("---- smallest_node module")
         if new_root:
             cur = new_root
         else:
@@ -53,17 +71,23 @@ class Bst:
         return cur
 
     def remove(self, d) -> bool:
+        logging.debug("---- || start remove")
+
         """
         basic cases is if node alone or have no nodes at all 
         """
+        logging.debug("---- || self.root check")
         if not self.root:
             return True
 
+        logging.debug("---- || only root node check")
         if (self.root.data == d) and (self.root.left is self.root.right is None):
             self.root = None
             return True
 
         # get object to delete and his father
+
+        logging.debug("---- || using find for node and parent node ")
         obj = self.find(d)
         node = obj[0]
         node_parent = obj[1]
@@ -76,6 +100,7 @@ class Bst:
         check from which side node is on position 
         put None to this position return True
         """
+        logging.debug("---- || this node is leaf")
         if node.left is node.right is None:  # leaf
             # look in which side is leaf
             if node.data > node_parent.data:
@@ -91,6 +116,7 @@ class Bst:
         adjust the pointer node_parent -> node.next_in_line (left / right)
         the garbage collector will collect unpointed node(obj)
         """
+        logging.debug("---- || check if node have an one child ")
         # node have left side only
         if node.left and (node.right is None):
             # checknode parent side
@@ -123,9 +149,10 @@ class Bst:
          - delete "small element
          - copy data from "small element" from right subtree
         """
+        logging.debug("---- || this node have an 2 children ")
         if node.left and node.right:
             smallest = self.smallest_node(node.right)
-            self.remove(smallest.data)
+            self.remove(smallest.data)  # remove by data 
             node.data = smallest.data
             return True
 
@@ -156,6 +183,7 @@ class Bst:
 
 
 if __name__ == "__main__":
+    print(f" cwd : {os.getcwd()}")
 
     bst = Bst(Node(35))
     bst.insert(22)
@@ -172,9 +200,9 @@ if __name__ == "__main__":
     # print(bst.find(28)[1])
     # print(f"bst size : {bst.get_size()}")
     # print(f"smallest note : {bst.smallest_node()}")
-    # print(bst.inorder_traversal())
-    # bst.remove(28)
-    # print(bst.inorder_traversal())
+    print(bst.inorder_traversal())
+    print(bst.remove(28))
+    print(bst.inorder_traversal())
     # bst.remove(58)
     # print(bst.inorder_traversal())
     # bst.remove(54)

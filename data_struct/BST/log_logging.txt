@@ -1,0 +1,19 @@
+2021-01-12 11:37:22,295 - DEBUG - ---- || start remove
+2021-01-12 11:37:22,295 - DEBUG - ---- || self.root check
+2021-01-12 11:37:22,295 - DEBUG - ---- || only root node check
+2021-01-12 11:37:22,295 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:37:22,295 - DEBUG -  ---- find module
+2021-01-12 11:37:22,295 - DEBUG - ---- || this node is leaf ? 
+2021-01-12 11:38:21,623 - DEBUG - ---- || start remove
+2021-01-12 11:38:21,623 - DEBUG - ---- || self.root check
+2021-01-12 11:38:21,623 - DEBUG - ---- || only root node check
+2021-01-12 11:38:21,623 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:38:21,623 - DEBUG -  ---- find module
+2021-01-12 11:38:21,623 - DEBUG - ---- || this node is leaf
+2021-01-12 11:39:00,101 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:39:00,103 - DEBUG - ---- || start remove
+2021-01-12 11:39:00,103 - DEBUG - ---- || self.root check
+2021-01-12 11:39:00,103 - DEBUG - ---- || only root node check
+2021-01-12 11:39:00,103 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:39:00,103 - DEBUG -  ---- find module
+2021-01-12 11:39:00,103 - DEBUG - ---- || this node is leaf
