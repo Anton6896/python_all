@@ -64,7 +64,7 @@ class Bst:
             return True
 
         # get object to delete and his father
-        obj = find(d)
+        obj = self.find(d)
         node = obj[0]
         node_parent = obj[1]
 
@@ -98,6 +98,7 @@ class Bst:
                 node_parent.right = node.left
             else:
                 node_parent.left = node.left
+
             return True
 
         # node have right side only
@@ -106,23 +107,52 @@ class Bst:
                 node_parent.right = node.right
             else:
                 node_parent.left = node.right
+
             return True
 
         """
-        most complicated is node have 2 children (or more)
+        most complicated is node have 2 children
+
+        look at :
+        -> target.right as root (right subtree)
+        will take smallest element at right subtree 
+        and replace the target with it 
+            
+            (order is important)
+         - look for the smallest element at right sub tree
+         - delete "small element
+         - copy data from "small element" from right subtree
         """
+        if node.left and node.right:
+            smallest = self.smallest_node(node.right)
+            self.remove(smallest.data)
+            node.data = smallest.data
+            return True
 
-    def in_order_traversal(self, node=None):
-        if node:
-            root = node
-        else:
-            root = self.root
+        return False
 
+    # ==============   traversals
+    def inorder_traversal(self):
+        return self._inorder_util(self.root)
+
+    def traversal(self, t_type): pass
+
+    # def inorderTraversal(self, root):
+    # #    this is in order mode man with beard way (stack overflow people way)
+    #     return (self.inorderTraversal(root.left) + [root.data]
+    #             + self.inorderTraversal(root.right)) if root else []
+
+    def _post_order_util(self, root): pass
+    def _pre_order_util(self, root): pass
+
+    def _inorder_util(self, root):
+        res = []
         if root:
-            self.in_order_traversal(root.left)
-            print(root)
-            self.in_order_traversal(root.right)
-        
+            res = self._inorder_util(root.left)
+            res.append(root.data)
+            res = res + self._inorder_util(root.right)
+
+        return res
 
 
 if __name__ == "__main__":
@@ -130,17 +160,25 @@ if __name__ == "__main__":
     bst = Bst(Node(35))
     bst.insert(22)
     bst.insert(26)
-    bst.insert(25)
     bst.insert(28)
+    bst.insert(25)
     bst.insert(18)
     bst.insert(54)
     bst.insert(44)
     bst.insert(60)
     bst.insert(58)
 
-    print(bst.find(28)[0])
-    print(bst.find(28)[1])
+    # print(bst.find(28)[0])
+    # print(bst.find(28)[1])
+    # print(f"bst size : {bst.get_size()}")
+    # print(f"smallest note : {bst.smallest_node()}")
+    # print(bst.inorder_traversal())
+    # bst.remove(28)
+    # print(bst.inorder_traversal())
+    # bst.remove(58)
+    # print(bst.inorder_traversal())
+    # bst.remove(54)
+    # print(bst.inorder_traversal())
+    # bst.remove(35)
+    # print(bst.inorder_traversal())
 
-    print(f"bst size : {bst.get_size()}")
-    print(f"smallest note : {bst.smallest_node()}")
-    bst.in_order_traversal()

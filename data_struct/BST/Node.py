@@ -47,9 +47,9 @@ class Node:
             # return tuple 0=node. 1=parent or None
             return (self, parent)
 
-        elif d < self.data and self.left:
+        elif (d < self.data) and self.left:
             return self.left.find(d, self)
-        elif d > self.data and self.right:
+        elif (d > self.data) and self.right:
             return self.right.find(d, self)
 
         return None
