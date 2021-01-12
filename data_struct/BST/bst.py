@@ -74,7 +74,7 @@ class Bst:
         logging.debug("---- || start remove")
 
         """
-        basic cases is if node alone or have no nodes at all 
+        basic cases is if node alone or have no nodes at all
         """
         logging.debug("---- || self.root check")
         if not self.root:
@@ -96,8 +96,8 @@ class Bst:
         # node to delete is leaf
         # assuming that the more than one node is in tree
 
-        find the node position and his parrent , 
-        check from which side node is on position 
+        find the node position and his parrent ,
+        check from which side node is on position
         put None to this position return True
         """
         logging.debug("---- || this node is leaf")
@@ -112,7 +112,7 @@ class Bst:
 
         """
         node that has one child (left or right)
-        because i am tracking parent node just 
+        because i am tracking parent node just
         adjust the pointer node_parent -> node.next_in_line (left / right)
         the garbage collector will collect unpointed node(obj)
         """
@@ -141,9 +141,9 @@ class Bst:
 
         look at :
         -> target.right as root (right subtree)
-        will take smallest element at right subtree 
-        and replace the target with it 
-            
+        will take smallest element at right subtree
+        and replace the target with it
+
             (order is important)
          - look for the smallest element at right sub tree
          - delete "small element
@@ -152,33 +152,53 @@ class Bst:
         logging.debug("---- || this node have an 2 children ")
         if node.left and node.right:
             smallest = self.smallest_node(node.right)
-            self.remove(smallest.data)  # remove by data 
+            self.remove(smallest.data)  # remove by data
             node.data = smallest.data
             return True
 
         return False
 
     # ==============   traversals
-    def inorder_traversal(self):
-        return self._inorder_util(self.root)
 
-    def traversal(self, t_type): pass
+    def traversal(self, t_type=None):
+        if t_type:
+            if t_type[:3] == "pre":
+                return self._pre_order_util(self.root)
+            elif t_type[:3] == "pos":
+                return self._post_order_util(self.root)
+        else:
+            return self._in_order_util(self.root)
 
     # def inorderTraversal(self, root):
     # #    this is in order mode man with beard way (stack overflow people way)
     #     return (self.inorderTraversal(root.left) + [root.data]
     #             + self.inorderTraversal(root.right)) if root else []
 
-    def _post_order_util(self, root): pass
-    def _pre_order_util(self, root): pass
-
-    def _inorder_util(self, root):
+    def _post_order_util(self, root):
+        # Left ->Right -> Root
         res = []
         if root:
-            res = self._inorder_util(root.left)
+            res = self._in_order_util(root.left)
+            res += self._in_order_util(root.right)
             res.append(root.data)
-            res = res + self._inorder_util(root.right)
+        return res
 
+    def _pre_order_util(self, root):
+        # Root -> Left ->Right
+        res = []
+        if root:
+            res.append(root.data)
+            res += self._in_order_util(root.left)
+            res += self._in_order_util(root.right)
+        return res
+
+    def _in_order_util(self, root):
+        # Left -> Root -> Right
+        res = []
+        if root:
+            res = self._in_order_util(root.left)
+            res.append(root.data)
+            res = res + self._in_order_util(root.right)
         return res
 
 
@@ -196,17 +216,8 @@ if __name__ == "__main__":
     bst.insert(60)
     bst.insert(58)
 
-    # print(bst.find(28)[0])
-    # print(bst.find(28)[1])
-    # print(f"bst size : {bst.get_size()}")
-    # print(f"smallest note : {bst.smallest_node()}")
-    print(bst.inorder_traversal())
-    print(bst.remove(28))
-    print(bst.inorder_traversal())
-    # bst.remove(58)
-    # print(bst.inorder_traversal())
-    # bst.remove(54)
-    # print(bst.inorder_traversal())
-    # bst.remove(35)
-    # print(bst.inorder_traversal())
+    print(f"pre order : {bst.traversal('preorder')}")
+    print(f"post order : {bst.traversal('postorder')}")
+    print(f"in order : {bst.traversal()}")
+
 

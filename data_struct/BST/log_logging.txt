@@ -17,3 +17,102 @@
 2021-01-12 11:39:00,103 - DEBUG - ---- || using find for node and parent node 
 2021-01-12 11:39:00,103 - DEBUG -  ---- find module
 2021-01-12 11:39:00,103 - DEBUG - ---- || this node is leaf
+2021-01-12 11:45:38,660 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:45:38,661 - DEBUG - ---- || start remove
+2021-01-12 11:45:38,661 - DEBUG - ---- || self.root check
+2021-01-12 11:45:38,661 - DEBUG - ---- || only root node check
+2021-01-12 11:45:38,661 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:45:38,661 - DEBUG -  ---- find module
+2021-01-12 11:45:38,661 - DEBUG - ---- || this node is leaf
+2021-01-12 11:47:21,185 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:47:21,187 - DEBUG - ---- || start remove
+2021-01-12 11:47:21,187 - DEBUG - ---- || self.root check
+2021-01-12 11:47:21,187 - DEBUG - ---- || only root node check
+2021-01-12 11:47:21,187 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:47:21,187 - DEBUG -  ---- find module
+2021-01-12 11:47:21,187 - DEBUG - ---- || this node is leaf
+2021-01-12 11:47:46,200 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:47:46,203 - DEBUG - ---- || start remove
+2021-01-12 11:47:46,203 - DEBUG - ---- || self.root check
+2021-01-12 11:47:46,203 - DEBUG - ---- || only root node check
+2021-01-12 11:47:46,203 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:47:46,203 - DEBUG -  ---- find module
+2021-01-12 11:47:46,203 - DEBUG - ---- || this node is leaf
+2021-01-12 11:48:31,188 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:48:31,188 - DEBUG - ---- || start remove
+2021-01-12 11:48:31,188 - DEBUG - ---- || self.root check
+2021-01-12 11:48:31,188 - DEBUG - ---- || only root node check
+2021-01-12 11:48:31,188 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:48:31,188 - DEBUG -  ---- find module
+2021-01-12 11:48:31,188 - DEBUG - ---- || this node is leaf
+2021-01-12 11:48:49,135 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:48:49,137 - DEBUG - ---- || start remove
+2021-01-12 11:48:49,137 - DEBUG - ---- || self.root check
+2021-01-12 11:48:49,137 - DEBUG - ---- || only root node check
+2021-01-12 11:48:49,137 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:48:49,137 - DEBUG -  ---- find module
+2021-01-12 11:48:49,137 - DEBUG - ---- || this node is leaf
+2021-01-12 11:49:48,748 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:49:48,749 - DEBUG - ---- || start remove
+2021-01-12 11:49:48,749 - DEBUG - ---- || self.root check
+2021-01-12 11:49:48,749 - DEBUG - ---- || only root node check
+2021-01-12 11:49:48,749 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:49:48,749 - DEBUG -  ---- find module
+2021-01-12 11:49:48,749 - DEBUG - ---- || this node is leaf
+2021-01-12 11:50:15,481 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:50:15,484 - DEBUG - ---- || start remove
+2021-01-12 11:50:15,484 - DEBUG - ---- || self.root check
+2021-01-12 11:50:15,484 - DEBUG - ---- || only root node check
+2021-01-12 11:50:15,484 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:50:15,484 - DEBUG -  ---- find module
+2021-01-12 11:50:15,484 - DEBUG - ---- || this node is leaf
+2021-01-12 11:51:30,714 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:51:30,714 - DEBUG - ---- || start remove
+2021-01-12 11:51:30,714 - DEBUG - ---- || self.root check
+2021-01-12 11:51:30,715 - DEBUG - ---- || only root node check
+2021-01-12 11:51:30,715 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:51:30,715 - DEBUG -  ---- find module
+2021-01-12 11:51:30,715 - DEBUG - ---- || this node is leaf
+2021-01-12 11:51:51,749 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:51:51,749 - DEBUG - ---- || start remove
+2021-01-12 11:51:51,749 - DEBUG - ---- || self.root check
+2021-01-12 11:51:51,749 - DEBUG - ---- || only root node check
+2021-01-12 11:51:51,749 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:51:51,749 - DEBUG -  ---- find module
+2021-01-12 11:51:51,749 - DEBUG - ---- || this node is leaf
+2021-01-12 11:52:54,351 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:52:54,351 - DEBUG - ---- || start remove
+2021-01-12 11:52:54,351 - DEBUG - ---- || self.root check
+2021-01-12 11:52:54,351 - DEBUG - ---- || only root node check
+2021-01-12 11:52:54,351 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:52:54,351 - DEBUG -  ---- find module
+2021-01-12 11:52:54,351 - DEBUG - ---- || this node is leaf
+2021-01-12 11:53:18,264 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:53:18,266 - DEBUG - ---- || start remove
+2021-01-12 11:53:18,266 - DEBUG - ---- || self.root check
+2021-01-12 11:53:18,266 - DEBUG - ---- || only root node check
+2021-01-12 11:53:18,266 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:53:18,266 - DEBUG -  ---- find module
+2021-01-12 11:53:18,266 - DEBUG - ---- || this node is leaf
+2021-01-12 11:53:31,466 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:53:31,467 - DEBUG - ---- || start remove
+2021-01-12 11:53:31,467 - DEBUG - ---- || self.root check
+2021-01-12 11:53:31,467 - DEBUG - ---- || only root node check
+2021-01-12 11:53:31,467 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:53:31,467 - DEBUG -  ---- find module
+2021-01-12 11:53:31,467 - DEBUG - ---- || this node is leaf
+2021-01-12 11:54:14,359 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:54:14,359 - DEBUG - ---- || start remove
+2021-01-12 11:54:14,359 - DEBUG - ---- || self.root check
+2021-01-12 11:54:14,359 - DEBUG - ---- || only root node check
+2021-01-12 11:54:14,359 - DEBUG - ---- || using find for node and parent node 
+2021-01-12 11:54:14,359 - DEBUG -  ---- find module
+2021-01-12 11:54:14,359 - DEBUG - ---- || this node is leaf
+2021-01-12 11:54:46,083 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:56:20,358 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:56:26,041 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:57:17,958 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:57:27,282 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:58:55,926 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 11:59:26,686 - DEBUG - ---- >>>  new root created ... 
+2021-01-12 12:00:23,115 - DEBUG - ---- >>>  new root created ... 
