@@ -34,60 +34,95 @@ class Bst:
             self.size += 1
             return True
 
-    def find(self, d) -> Node:  
+    def find(self, d) -> Node:
         # return tuple 0=node. 1=parent
         if self.root:
             return self.root.find(d)
         else:
             return None
 
+    def smallest_node(self, new_root=None):
+        if new_root:
+            cur = new_root
+        else:
+            cur = self.root
+
+        while cur.left:
+            cur = cur.left
+
+        return cur
+
     def remove(self, d) -> bool:
-
-        # base cases ---------------------
-        # tree is empty
+        """
+        basic cases is if node alone or have no nodes at all 
+        """
         if not self.root:
-            return False
+            return True
 
-        # only root node
         if (self.root.data == d) and (self.root.left is self.root.right is None):
             self.root = None
             return True
-        
 
-        # growing complexity 
+        # get object to delete and his father
         obj = find(d)
         node = obj[0]
         node_parent = obj[1]
 
         """
-        # node with d  -> is leaf
+        # node to delete is leaf
         # assuming that the more than one node is in tree
-        # return tuple 0=node. 1=parent
 
         find the node position and his parrent , 
         check from which side node is on position 
         put None to this position return True
         """
         if node.left is node.right is None:  # leaf
-            if node_parent.left:
-                if node_parent.left.data == node.data:
-                    node_parent.left = None
-                    return True
-            elif node_parent.right:
-                node_parent.right.data == node.data:
+            # look in which side is leaf
+            if node.data > node_parent.data:
                 node_parent.right = None
-                return True
+            else:
+                node_parent.left = None
 
-        
+            return True
+
         """
         node that has one child (left or right)
         because i am tracking parent node just 
-        adjust the pointer from parent to next child on line (for this case)
+        adjust the pointer node_parent -> node.next_in_line (left / right)
+        the garbage collector will collect unpointed node(obj)
+        """
+        # node have left side only
+        if node.left and (node.right is None):
+            # checknode parent side
+            if node.data > node_parent.data:
+                node_parent.right = node.left
+            else:
+                node_parent.left = node.left
+            return True
+
+        # node have right side only
+        elif node.right and (node.left is None):
+            if node.data > node_parent.data:
+                node_parent.right = node.right
+            else:
+                node_parent.left = node.right
+            return True
+
+        """
+        most complicated is node have 2 children (or more)
         """
 
+    def in_order_traversal(self, node=None):
+        if node:
+            root = node
+        else:
+            root = self.root
 
-
-
+        if root:
+            self.in_order_traversal(root.left)
+            print(root)
+            self.in_order_traversal(root.right)
+        
 
 
 if __name__ == "__main__":
@@ -107,3 +142,5 @@ if __name__ == "__main__":
     print(bst.find(28)[1])
 
     print(f"bst size : {bst.get_size()}")
+    print(f"smallest note : {bst.smallest_node()}")
+    bst.in_order_traversal()
