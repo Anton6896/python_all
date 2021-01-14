@@ -14,7 +14,7 @@ class Point_1:
     factory initialization for couple types of object that have an same structure 
     """
 
-    factory = PointFactory()
+    factory = PointFactory()  # <- init other class
 
     def __init__(self, x, y):
         super().__init__()
