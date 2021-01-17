@@ -1,11 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-
-import os
 import time
 
 
@@ -37,10 +34,13 @@ def mac_tes():
 
 def linux_tes():
     """
-    look for some blog entries 
+    get to the page , look for all entries and get all links of blog entries
 
     xpath :: https://www.guru99.com/xpath-selenium.html
     with xpath is more comfartable to make an search in page 
+
+
+    * driver.clear() <- use before typing in search field 
 
     """
 
