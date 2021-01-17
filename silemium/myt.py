@@ -50,38 +50,40 @@ def linux_tes():
 
     print(f"driver title : \n{driver.title}\n")
 
-    # to get data from web page , give to selenium to wait for the page be loaded !!
-    # try:
-    #     elements = WebDriverWait(driver, 20).until(
-    #         EC.presence_of_element_located(
-    #             (By.XPATH, "/html/body/div[1]/div[2]/div/div/div/div[1]/div")
-    #         )
-    #     )
+    try:
+        elements = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(
+                (By.XPATH, "/html/body/div[1]/div[2]/div/div/div/div[1]/div")
+            )
+        )
 
-    #     # with xpath of element will return the all data !
-    #     # links = elements.find_elements_by_xpath('//*[@id="post-898"]/div/div[2]/h2/a')
+        entires = elements.find_elements_by_class_name('entry-title')
+        for i in entires:
+            print(f"blog entire ::  {i.text}")
 
-    #     entires = elements.find_elements_by_class_name('entry-title')
+            # look fot the xpath with this title and get link
+            # not so officiant but working
+            elem = driver.find_element_by_xpath(
+                f"//*[contains(text(),'{i.text[:10]}')]")
+            print(f"\tlink = {elem.get_attribute('href')}")
 
-    #     for i in entires:
-    #         print(f"blog entire ::  {i.text}")
-    #         print(f"\t===>  : {i.get_attribute('xpath')}")
+            
+    finally:
+        # if cant find till 10 sec of any other problent just quite
+        driver.quit()
 
-    # finally:
-    #     # if cant find till 10 sec of any other problent just quite
-    #     driver.quit()
-
-    """
-    <h2 class="card-title entry-title">
-    <a href="https://thejoyfuljourneyer1.blog/reflection-or-real/" title="Reflection? Or real?" rel="bookmark">Reflection? Or real?</a>
-    </h2>
-    """
-    # web_element = driver.find_element_by_xpath("//*[text()='Reflection? Or real?']")
-    web_element = driver.find_element_by_xpath(
-        "//*[contains(text(),'Reflection')]")
-    # Xpath=//tagname[@attribute='value']  <--
-    print(web_element.text)
-    print(web_element.get_attribute('href'))
+    # """
+    # <h2 class="card-title entry-title">
+    # <a href="https://thejoyfuljourneyer1.blog/reflection-or-real/"
+    #     title="Reflection? Or real?" rel="bookmark">Reflection? Or real?</a>
+    # </h2>
+    # """
+    # # web_element = driver.find_element_by_xpath("//*[text()='Reflection? Or real?']")
+    # web_element = driver.find_element_by_xpath(
+    #     "//*[contains(text(),'Reflection')]")
+    # # Xpath=//tagname[@attribute='value']  <--
+    # print(web_element.text)
+    # print(web_element.get_attribute('href'))
 
     driver.quit()
 
