@@ -2,3 +2,4 @@ env
 win_env
 .vscode
 .idea
+*.pyc
