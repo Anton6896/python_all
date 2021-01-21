@@ -1,4 +1,6 @@
-# basic hash table implementation
+"""
+seperate chaining for collision problems
+"""
 from ClassData import Some
 
 

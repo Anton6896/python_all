@@ -39,5 +39,3 @@ def check_t():
 
 if __name__ == "__main__":
     check_t()
-    tb = Ta
-    
