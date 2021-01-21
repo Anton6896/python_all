@@ -88,3 +88,4 @@ class Table:
         # return value in range of max table size ( hash )  <- of course this is an super BAD function !!!
         # but this all for idea not for production use
         return (obj.get_val() * 24) % self.table_max_size
+
