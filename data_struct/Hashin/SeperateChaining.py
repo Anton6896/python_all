@@ -4,6 +4,7 @@ seperate chaining for collision problems
 from ClassData import Some
 
 
+
 class Table:
     def __init__(self, amount: int):
         # init new table with "amount" of buckets with 0 as empty indicator

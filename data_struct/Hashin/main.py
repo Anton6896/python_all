@@ -1,7 +1,10 @@
+"""
 # crete hash table implementation
-# python already implemented hash table as Pythons Dictionary data struck
+# python already implemented hash table as 
+# Pythons Dictionary data struck
+"""
 from ClassData import Some
-from TableMy import Table
+from SeperateChaining import Table
 
 
 def my():
@@ -16,7 +19,7 @@ def my():
     t.show_all()
 
 
-def check_t():
+def saperate_chain_aproch():
     t = Table(5)
 
     s1 = Some("data 1")
@@ -38,4 +41,5 @@ def check_t():
 
 
 if __name__ == "__main__":
-    check_t()
+    # saperate_chain_aproch()
+    pass
