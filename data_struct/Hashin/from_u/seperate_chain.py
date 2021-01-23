@@ -4,7 +4,6 @@ hashtable with seperate chaining approch
 
 
 class Entry:
-
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -23,7 +22,6 @@ class Entry:
 
 
 class HashTable_my:
-
     def __init__(self, capasity_=3, load_factor_=0.75):
         self.capasity = capasity_
         self.load_factor = load_factor_
@@ -33,10 +31,10 @@ class HashTable_my:
         self.size = 0
 
     def size(self) -> int:
-        return self.size()
+        return self.size
 
     def is_empty(self) -> bool:
-        return self.size() == 0
+        return self.size == 0
 
     def normalize_index(self, key_hash) -> int:
         # get index that in range of max capasity
@@ -51,5 +49,5 @@ class HashTable_my:
         return
 
 
-if "__main__" == __name__:
-    pass
+# if "__main__" == __name__:
+#     pass
