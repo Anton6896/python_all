@@ -40,9 +40,9 @@ def saperate_chain_aproch():
     t.show_all()
 
 
-def addressing_my(): pass
+def line_probing_my(): pass
 
 
 if __name__ == "__main__":
     # saperate_chain_aproch()
-    addressing_my()
+    line_probing_my()
