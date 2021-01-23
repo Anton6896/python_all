@@ -1,5 +1,5 @@
 """
-hashtable with seperate chaining approch 
+hashtable with separate chaining approach 
 """
 
 
@@ -44,10 +44,23 @@ class HashTable_my:
         self.table_list = [None for x in range(self.capasity)]
         self.size = 0
 
-    def hash_key(self, key): 
+    def has_key(self, key):
         bucket_index = self.normalize_index(hash(key))
-        return
+        return self.table_list[bucket_index] is not None
+
+    def insert(self, key, value):
+        e = Entry(key, value)
+        bucket_index = self.normalize_index(e.hash)
+        return bucket_insert_entry(bucket_index, e)
+
+    def bucket_insert_entry(index, entry):
+        bucket = self.table_list[index]
 
 
+<<<<<<< HEAD
 # if "__main__" == __name__:
 #     pass
+=======
+if "__main__" == __name__:
+    pass
+>>>>>>> baf7f44370184c85209ad94358036bc8977f2258
