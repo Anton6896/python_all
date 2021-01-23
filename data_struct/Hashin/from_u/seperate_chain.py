@@ -4,6 +4,7 @@ hashtable with seperate chaining approch
 
 
 class Entry:
+
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -11,7 +12,7 @@ class Entry:
 
     # objects with different keys will have diferent hashes
     # in case of collision check the keys
-    def equals(self, other: Entry) -> bool:
+    def equals(self, other) -> bool:
         if self.hash != other.hash:
             return False
 
@@ -26,7 +27,8 @@ class HashTable_my:
     def __init__(self, capasity_=3, load_factor_=0.75):
         self.capasity = capasity_
         self.load_factor = load_factor_
-        self.table_list = [None for x in range(capacipy_)]  # fill all with None value 
+        # fill all with None value
+        self.table_list = [None for x in range(capasity_)]
         self.threshold = (capasity_ * load_factor_)
         self.size = 0
 
@@ -44,4 +46,10 @@ class HashTable_my:
         self.table_list = [None for x in range(self.capasity)]
         self.size = 0
 
+    def hash_key(self, key): 
+        bucket_index = self.normalize_index(hash(key))
+        return
 
+
+if "__main__" == __name__:
+    pass
