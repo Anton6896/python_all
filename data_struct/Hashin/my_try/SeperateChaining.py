@@ -4,7 +4,6 @@ seperate chaining for collision problems
 from ClassData import Some
 
 
-
 class Table:
     def __init__(self, amount: int):
         # init new table with "amount" of buckets with 0 as empty indicator
@@ -69,11 +68,7 @@ class Table:
             for i in range(len(self.table[self._util_get_hash(obj)])):
                 if self.table[self._util_get_hash(obj)][i].get_val() == obj.get_val():
                     # remove by index 
-                    del(self.table[self._util_get_hash(obj)][i])
-
-
-
-
+                    del (self.table[self._util_get_hash(obj)][i])
 
     def show_all(self):
         # loop thru the table and show all objects
@@ -85,10 +80,8 @@ class Table:
             else:
                 print("empty - ")
 
-
     def _util_get_hash(self, obj: Some):
         # using classData as obj that have value for hashing (as example)  <- get_val()
         # return value in range of max table size ( hash )  <- of course this is an super BAD function !!!
         # but this all for idea not for production use
         return (obj.get_val() * 24) % self.table_max_size
-
