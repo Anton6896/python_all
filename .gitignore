@@ -3,3 +3,4 @@ win_env
 .vscode
 .idea
 *.pyc
+.DS_Store
