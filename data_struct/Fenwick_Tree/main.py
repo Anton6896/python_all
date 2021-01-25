@@ -2,7 +2,6 @@
 Binary Indexed Tree or Fenwick Tree
 """
 from copy import deepcopy
-import gmpy
 
 
 def lsb(x):

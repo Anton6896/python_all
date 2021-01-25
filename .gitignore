@@ -1,5 +1,5 @@
 env
-win_env
+venv_win
 .vscode
 .idea
 *.pyc
