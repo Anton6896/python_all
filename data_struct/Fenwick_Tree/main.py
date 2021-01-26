@@ -1,31 +1,29 @@
 """
 Binary Indexed Tree or Fenwick Tree
+
+very confusing because you have an binary rep based 1
+and you have an regular for loops that based 0
+must find an connection for proper slicing in the array
 """
 from copy import deepcopy
-
-"""
-[3,4,-2,7,3,11,5,-8,-9,2,4,-8]      <- data for testing
-[3,7,-2,12,3,14,5,23,-9,-7,4,-11]   <- fenwick tree
-"""
+import unittest
 
 
 class FT:
 
     def __init__(self, arr_new):
-        self.arr_ft = deepcopy(arr_new)  # <- for manipulations
-        self.ft_init()
+        # the none value if for appropriate counter in list (place holder)
+        # bin counter will start from 1
+        self.arr_data = [None] + deepcopy(arr_new)
 
-    def ft_init(self):
-        for i in range(len(self.arr_ft)):  # <- from 1 to max size
-            # get lsb from 1 to len() + (my position 0 base )
-            p_idx = self.lsb(i + 1) + i
+    def ft_create(self):
+        for i in range(1, len(self.arr_data)):
+            p_idx = self.lsb(i) + i
 
-            if p_idx < len(self.arr_ft):
-                self.arr_ft[p_idx] = (self.arr_ft[i] + self.arr_ft[p_idx])
+            if p_idx < len(self.arr_data):  # <- out of bound check
+                self.arr_data[p_idx] = (self.arr_data[i] + self.arr_data[p_idx])
 
-            print(f"i :{i} \t-> lsb:{self.lsb(i+1)} , parent : {p_idx} ")
-
-        print(self.arr_ft)
+        return self.arr_data
 
     def lsb(self, x) -> int:
         """
@@ -44,6 +42,28 @@ class FT:
         # print(f"lowest value in binary for {x} :-> {bp[idx]}")
         return bp[idx]
 
+    def sum_range(self, f_idx, to_idx):
+        # range queries
+        pass
+
+
+class TestSum(unittest.TestCase):
+    """
+    [3,4,-2,7,3,11,5,-8,-9,2,4,-8]      <- data for testing
+    [3,7,-2,12,3,14,5,23,-9,-7,4,-11]   <- fenwick tree
+    """
+    data = [3, 4, -2, 7, 3, 11, 5, -8, -9, 2, 4, -8]  # < test data
+    test_case = [None, 3, 7, -2, 12, 3, 14, 5, 23, -9, -7, 4, -11]  # < test case
+
+    ft = FT(data)
+    check_this = ft.ft_create()
+
+    def test_equality(self):
+        self.assertEqual(TestSum.test_case, TestSum.check_this, "Should be ok")
+
+    def test_sum(self):
+        pass
+
 
 if __name__ == '__main__':
-    ft = FT([3, 4, -2, 7, 3, 11, 5, -8, -9, 2, 4, -8])
+    unittest.main()
