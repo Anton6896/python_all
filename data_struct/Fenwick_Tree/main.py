@@ -48,31 +48,32 @@ class FT:
         # print(f"lowest value in binary for {x} :-> {bp[idx]}")
         return bp[idx]
 
-    def sum_range(self, f_idx, to_idx):
-        # to_idx = 15  , f_idx = 10
-        # sum(data[15]) - sum(data[9])  ==> from 10 to 15 range
-        return self._sum_prefix(f_idx) - self._sum_prefix(to_idx - 1)
+    def sum_range(self, from_idx, to_idx):
+        """
+        find prefix sum from from_idx, to_idx
+        det an difference ()
+        """
+
+        return self._sum_prefix(to_idx) - self._sum_prefix(from_idx - 1)
 
     def _sum_prefix(self, idx):
-        # return sum from index 0 to idx
-        sum = 0
+        # return sum from index (0 --> idx)
+        sum_ = 0
         while idx > 0:
-            sum += self.arr_data[idx]
+            sum_ += self.arr_data[idx]
             idx = (idx - self.lsb(idx))
 
-        return sum
+        return sum_
 
-    def update_data(self, pos, value):
+    def update_point(self, pos, value):
         # for update i need to update from current to up to top parent
-        # todo update list
+        pass
+
+    def remove_point(self, value):
         pass
 
 
 class TestSum(unittest.TestCase):
-    """
-    [3,4,-2,7,3,11,5,-8,-9,2,4,-8]      <- data for testing
-    [3,7,-2,12,3,14,5,23,-9,-7,4,-11]   <- fenwick tree
-    """
     data = [3, 4, -2, 7, 3, 11, 5, -8, -9, 2, 4, -8]  # < test data
     test_case = [0, 3, 7, -2, 12, 3, 14, 5, 23, -9, -7, 4, -11]  # < test case
 
@@ -84,7 +85,7 @@ class TestSum(unittest.TestCase):
 
     data2 = [1, 8, 5, 4, 15, 2, 11, 7]
     ft_2 = FT(data2)  # [1,9,5,18,15,17,11,53]
-    sum_to_test = ft_2.sum_range(8, 3)
+    sum_to_test = ft_2.sum_range(3, 8)
 
     def test_range_sum(self):
         self.assertEqual(TestSum.sum_to_test, 44, "Should  be 44")
