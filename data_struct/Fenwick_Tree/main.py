@@ -18,6 +18,7 @@ class FT:
         # bin counter will start from 1
         self.arr_data = [0] + deepcopy(arr_new)
         self.ft_init()
+        print(f"tree created : {self.getter()}")
 
     def ft_init(self):
         for i in range(1, len(self.arr_data)):
@@ -25,8 +26,6 @@ class FT:
 
             if p_idx < len(self.arr_data):  # <- out of bound check
                 self.arr_data[p_idx] = (self.arr_data[i] + self.arr_data[p_idx])
-
-        print(self.arr_data)
 
     def getter(self):
         return self.arr_data
@@ -67,7 +66,24 @@ class FT:
 
     def update_point(self, pos, value):
         # for update i need to update from current to up to top parent
-        pass
+        if pos < len(self.arr_data):
+            past_value = self.arr_data[pos]  # get value that was there
+
+            # first manual jump
+            self.arr_data[pos] = value  # new value
+            pos = (pos + self.lsb(pos))  # first jump to parent
+
+            # while in range update all parent data
+            # remove amount that was at position and adjust the new amount
+            while pos < len(self.arr_data):
+                self.arr_data[pos] = (self.arr_data[pos] - past_value + value)
+                pos = (pos + self.lsb(pos))
+
+            print(f"new tree : {self.getter()}")
+            return True
+
+        else:
+            return False
 
     def remove_point(self, value):
         pass
@@ -89,6 +105,14 @@ class TestSum(unittest.TestCase):
 
     def test_range_sum(self):
         self.assertEqual(TestSum.sum_to_test, 44, "Should  be 44")
+
+    # bit 1 base array (start from 1)
+    # [1,9,5,18,15,17,11,53]
+    ft_2.update_point(2, 8)  # 9 -> 8  ==> 1+8+5=13
+    sum_to_test_2 = ft_2.sum_range(0, 3)
+
+    def test_num_change(self):
+        self.assertEqual(TestSum.sum_to_test_2, 13, "Should  be 13")
 
 
 if __name__ == '__main__':
