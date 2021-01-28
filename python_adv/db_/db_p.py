@@ -38,6 +38,7 @@ def create_db():
 
 
 def get_data():
+    connection = None
     # get data from sqlite3
     try:
         connection = sqlite3.connect(db_file)
@@ -139,9 +140,10 @@ class Person:
 
 if __name__ == "__main__":
     # create_db()
-    # get_data()
-    p1 = Person().load_person(2)
-    print(p1)
+    get_data()
+    # p1 = Person().load_person(2)
+    # print(p1)
+    #
+    # p2 = Person(10, "person10", "lname10", 56).insert_person()
+    # p1.show_all()
 
-    p2 = Person(10, "person10", "lname10", 56).insert_person()
-    p1.show_all()
