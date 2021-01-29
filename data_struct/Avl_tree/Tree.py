@@ -26,20 +26,60 @@ class Tree:
         # left left
         if balance > 1 and key < root.left.value:
             return self.right_rotation(root)
+        """
+                 z                                      y 
+                / \                                   /   \
+               y   T4      Right Rotate (z)          x      z
+              / \          - - - - - - - - ->      /  \    /  \ 
+             x   T3                               T1  T2  T3  T4
+            / \
+          T1   T2
+        """
 
         # left right
         if balance > 1 and key > root.left.value:
             root.left = self.left_rotation(root.left)
             return self.right_rotation(root)
 
+        """
+             z                               z                           x
+            / \                            /   \                        /  \ 
+           y   T4  Left Rotate (y)        x    T4  Right Rotate(z)    y      z
+          / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / \
+        T1   x                          y    T3                    T1  T2 T3  T4
+            / \                        / \
+          T2   T3                    T1   T2
+        
+        """
+
         # right right
         if balance < -1 and key > root.right.value:
             return self.left_rotation(root)
+
+        """
+           z                                y
+         /  \                            /   \ 
+        T1   y     Left Rotate(z)       z      x
+            /  \   - - - - - - - ->    / \    / \
+           T2   x                     T1  T2 T3  T4
+               / \
+             T3  T4
+        """
 
         # right left
         if balance < -1 and key < root.right.value:
             root.right = self.right_rotation(root.right)
             return self.left_rotation(root)
+
+        """
+           z                            z                            x
+          / \                          / \                          /  \ 
+        T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y
+            / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \    / \
+           x   T4                      T2   y                  T1  T2  T3  T4
+          / \                              /  \
+        T2   T3                           T3   T4
+        """
 
     def right_rotation(self, root) -> Node:
         ...
