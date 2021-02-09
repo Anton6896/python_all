@@ -14,8 +14,6 @@ def switch_good(operation, x, y):
     return {
         'add': lambda: x + y,
         'sub': lambda: x - y,
-
-
     }.get(operation, lambda: 'no option')()  # <- all as a function
 
 
