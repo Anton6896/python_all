@@ -1,6 +1,5 @@
 import socket
 import threading
-from collections import namedtuple
 
 HOST = '127.0.0.1'
 PORT = 9090
