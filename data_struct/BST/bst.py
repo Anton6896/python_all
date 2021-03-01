@@ -13,7 +13,6 @@ logging.basicConfig(
     filename="log_logging.txt"
 )
 
-
 """
 Binary search tree
 using node class
@@ -28,16 +27,17 @@ using node class
 
 
 class Bst:
+    size = 0
+
     def __init__(self, node=None) -> None:
         logging.debug("---- >>>  new root created ... ")
         self.root = node
-        self.size = 0
 
         if self.root:
             self.size += 1
 
     def get_size(self) -> int:
-        return my_counter() + self.size
+        return Node.get_size() + self.size
 
     def is_empty(self) -> bool:
         return self.get_size() == 0
@@ -219,5 +219,4 @@ if __name__ == "__main__":
     print(f"pre order : {bst.traversal('preorder')}")
     print(f"post order : {bst.traversal('postorder')}")
     print(f"in order : {bst.traversal()}")
-
-
+    print(bst.get_size())

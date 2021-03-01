@@ -7,14 +7,8 @@ bst  Node is making the all most heavy lifting calculation
 """
 
 
-def my_counter():
-    # this function is place holder for static var
-    return my_counter.counter
-
-
 class Node:
-
-    my_counter.counter = 0
+    counter = 0  # cls variable
 
     def __init__(self, data) -> None:
         self.data = data
@@ -31,7 +25,7 @@ class Node:
                 return self.left.insert(d)
             else:
                 self.left = Node(d)
-                my_counter.counter += 1
+                self.add_one()
                 return True
 
         else:
@@ -39,7 +33,7 @@ class Node:
                 return self.right.insert(d)
             else:
                 self.right = Node(d)
-                my_counter.counter += 1
+                self.add_one()
                 return True
 
     def find(self, d, parent=None):
@@ -54,7 +48,18 @@ class Node:
 
         return None
 
+# using an class for count all node instances
+    @classmethod
+    def add_one(cls):
+        cls.counter += 1
+
+    @classmethod
+    def remove_one(cls):
+        cls.counter -= 1
+
+    @classmethod
+    def get_size(cls):
+        return cls.counter
+
     def __str__(self) -> str:
         return f"node with data : {self.data}"
-
-
