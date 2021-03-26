@@ -4,3 +4,4 @@ venv_win
 .idea
 *.pyc
 .DS_Store
+venv
