@@ -47,12 +47,7 @@ def locator():
 
 
 def locator2():
-    """
-    get to page https://www.techwithtim.net/
-    :return:
-    """
-
-    # get to page with all posts
+    # navigate to target page
     driver.get('https://www.techwithtim.net/')
     search_field = driver.find_element_by_name('s')
     search_field.send_keys('tet')
@@ -69,11 +64,14 @@ def locator2():
     delay = 3  # sec defaults
 
     try:
+        # wait to the object in dom with id=main
         elem_main = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'main')))
 
+        # from this object grub all tags articles
         article_list = elem_main.find_elements_by_tag_name('article')
+
         for article in article_list:
-            # see that the obj return an list ! so you need the 1 element (there is one element at all )
+            # for ech article. print data
 
             link_obj = article.find_elements_by_class_name('entry-title')[0]
             title = link_obj.find_element_by_tag_name('a').get_attribute("text")
@@ -85,6 +83,7 @@ def locator2():
         print('Loading took too much time!')
 
     finally:
+        # close driver
         driver.quit()
 
 
