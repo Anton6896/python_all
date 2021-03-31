@@ -33,6 +33,9 @@ def test_image_in_place():
 
 
 def test_selenium_1():
+    """
+    go to this site in navbar navigate to field , fill with word "puppies" , push button, check result
+    """
     driver.get('https://www.seleniumeasy.com/test')
     driver.find_element(By.XPATH, '//*[@id="navbar-brand-centered"]/ul[1]/li[1]/a').click()
     driver.find_element(By.XPATH, '//*[@id="navbar-brand-centered"]/ul[1]/li[1]/ul/li[1]/a').click()
@@ -56,7 +59,7 @@ def test_google_search():
     """
     try:
         driver.get('https://www.google.com/')
-        delay = 3  # wait delay
+        delay = 3  # wait till google site is ready for search
         WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.NAME, 'q'))).send_keys('puppies')
         driver.find_element(By.NAME, 'btnK').submit()
         assert "puppies" in driver.title
