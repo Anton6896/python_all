@@ -1,6 +1,5 @@
 """
-the nav bar as HeaderNavMap
-pattern : Page map Pattern
+Navigation in nav bar
 """
 import os
 from selenium import webdriver
@@ -31,7 +30,3 @@ class HeaderNavMap:
     @property
     def guides_link(self):
         return self._driver.find_element(By.CSS_SELECTOR, "[href*='/guides']")
-
-
-if __name__ == '__main__':
-    pass
