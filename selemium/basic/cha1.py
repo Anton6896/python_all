@@ -13,7 +13,7 @@ driver = webdriver.Chrome(driver_path)
 
 def test_image_in_place():
     driver.get('https://statsroyale.com/')
-    #  go to card page (this is a link on navbar)
+    #  go to card pages (this is a link on navbar)
     driver.find_element(By.CSS_SELECTOR, "[href='/cards']").click()
 
     try:
@@ -53,7 +53,7 @@ def test_selenium_1():
 
 def test_google_search():
     """
-    open an browser , go to google page , in search field look for puppies,
+    open an browser , go to google pages , in search field look for puppies,
      push submit, close the window, return title
     :return: title of google search
     """
