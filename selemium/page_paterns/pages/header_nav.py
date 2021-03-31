@@ -9,7 +9,7 @@ class HeaderNavMap:
         self._driver = driver
 
     @property
-    def card_link(self):
+    def cards_link(self):
         return self._driver.find_element(By.CSS_SELECTOR, "[href='/cards']")
 
     @property
@@ -22,7 +22,7 @@ class HeaderNav:
         self.map = HeaderNavMap(driver)
 
     def goto_cart_page(self):
-        self.map.card_link.click()
+        self.map.cards_link.click()
 
     def goto_guide_page(self):
         self.map.guides_link.click()
