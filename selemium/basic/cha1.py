@@ -83,4 +83,4 @@ def test_google_search():
 #     test_google_search()
 #     test_image_in_place()
 #     test_selenium_1()
-#     # test_selenium_2()
+
