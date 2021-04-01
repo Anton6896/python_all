@@ -11,8 +11,8 @@ from pathlib import Path
 from selenium import webdriver
 import time
 
-# driver_path = os.path.join(str(Path(__file__).parent.parent), 'chromedriver_win32', 'chromedriver.exe')
-driver_path = os.path.join(str(Path(__file__).parent.parent), 'driver_linux', 'chromedriver')
+driver_path = os.path.join(str(Path(__file__).parent.parent), 'chromedriver_win32', 'chromedriver.exe')
+# driver_path = os.path.join(str(Path(__file__).parent.parent), 'driver_linux', 'chromedriver')
 driver = webdriver.Chrome(driver_path)
 
 
