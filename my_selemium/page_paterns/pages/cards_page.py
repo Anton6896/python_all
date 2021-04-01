@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selemium_my.page_paterns.pages.base.page_base import PageBase
+from my_selemium.page_paterns.pages.base.page_base import PageBase
 
 
 class CardsPage(PageBase):
