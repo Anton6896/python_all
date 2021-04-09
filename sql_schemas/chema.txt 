@@ -1,0 +1,46 @@
+create table employee
+(
+    emp_id        int primary key not null,
+    emp_firsname  varchar(20),
+    emp_lastname  varchar(20),
+    emp_birthdate date,
+    emp_sex       varchar(1),
+    emp_salary    double,
+    super_id      int default null,
+    branch_id     int,
+    foreign key (super_id) references employee (emp_id),
+    foreign key (branch_id) references branch (branch_id)
+);
+
+create table branch
+(
+    branch_id      int primary key not null,
+    branch_name    varchar(20),
+    mgr_id         int,
+    mgr_start_date date,
+    foreign key (mgr_id) references employee (emp_id)
+);
+
+create table client
+(
+    client_id   int primary key not null,
+    client_name varchar(20),
+    branch_id   int,
+    foreign key (branch_id) references branch (branch_id)
+);
+
+create table works_with
+(
+    enm_id      int primary key references employee (emp_id),
+    client_id   int primary key references client (client_id),
+    roral_sales double
+);
+
+create table branch_supplier
+(
+    branch_id     int primary key references branch (branch_id),
+    supplier_name varchar(40) primary key not null,
+    supply_type   varchar(50)
+);
+
+

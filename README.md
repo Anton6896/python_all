@@ -14,7 +14,4 @@ https://www.youtube.com/watch?v=oBt53YbR9Kk&list=WL&index=2&t=1407s&ab_channel=f
 https://www.youtube.com/watch?v=RBSGKlAvoiM&t=2207s&ab_channel=freeCodeCamp.org
 
 
-# selenium (Tech With Tim , )
-https://www.youtube.com/watch?v=U6gbGk5WPws&ab_channel=TechWithTim
-
 
