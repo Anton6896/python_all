@@ -1,0 +1,51 @@
+create database freeCode;
+use freeCode;
+
+create table students
+(
+    id    INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name  varchar(50),
+    major varchar(20) default 'undefined'
+);
+
+drop table students;
+show tables;
+
+select *
+from students;
+
+insert into students (name, major)
+values ('nik black', 'biology'),
+       ('mike', 'scince'),
+       ('noga', 'math'),
+       ('jin', 'biology');
+
+insert into students (name)
+values ('bob');
+
+delete
+from students
+where id = 2;
+
+# update row entry student ==================================
+update students
+set name='new name'
+where name = 'jin';
+
+update students
+set major = 'bio'
+where major = 'biology';
+
+# =============================================================
+
+select name, major
+from students
+where major <> 'bio'
+  and name <> 'bob'
+order by major;
+
+select *
+from students
+where major in ('bio', 'math')
+  and name <> 'noga';
+
