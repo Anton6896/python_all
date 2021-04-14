@@ -21,6 +21,10 @@ create table branch
     foreign key (mgr_id) references employee (emp_id)
 );
 
+# alter table employee -> add freight keys now
+# foreign key (super_id) references employee (emp_id),
+# foreign key (branch_id) references branch (branch_id)
+
 create table client
 (
     client_id   int primary key not null,
