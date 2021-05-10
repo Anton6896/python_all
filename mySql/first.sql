@@ -300,7 +300,7 @@ where p.UnitPrice > 50;
 -- 6
 select *
 from Products p
-         join Categories C on p.CategoryID = C.CategoryID
+         inner join Categories C on p.CategoryID = C.CategoryID
 where ProductID = 3;
 
 -- 7
@@ -342,6 +342,33 @@ from Orders o
 where City in ('London', 'Redmond')
 order by OrderID;
 
+-- 12
+select *
+from Orders o
+         join Shippers S on o.ShipVia = S.ShipperID
+where ShipRegion is not null
+  and datepart(year, ShippedDate) = 1997;
+
+
+-- order is os null means that they newer ordered
+-- to customers add orders and show orders that have null (left join will add null if not exists)
+select *
+from Customers c
+         left join Orders o on c.CustomerID = o.CustomerID
+where OrderID is null;
+
+
+-- 14  -- order on same address as costumes
+select o.OrderID, o.ShipAddress, c.Address
+from Orders o
+         join Customers C on o.CustomerID = C.CustomerID
+where o.ShipAddress = C.Address;
+
+-- 16
+select OrderID, CompanyName
+from Customers c  left join Orders o on c.CustomerID = o.CustomerID;
+
+
 
 -- group by =====================================================================================
 
@@ -355,7 +382,16 @@ from (
      ) as tmp;
 
 
+--7
+select convert(varchar, min(BirthDate), 113) as min,
+       convert(varchar, max(BirthDate), 113) as max
+from Employees;
 
+-- 9
+select count(distinct CustomerID) as idAmount
+from Orders;
+
+-- 10
 
 
 
