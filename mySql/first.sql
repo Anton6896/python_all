@@ -261,11 +261,62 @@ from Employees;
 select *
 from Employees;
 
-select LastName + ' ' + cast(BirthDate as varchar)       as name,
-       convert(varchar, HireDate, 104)                   as hired,
-       isnull(convert(varchar, ReportsTo), 'no manager') as manager
+select LastName + ' ' + cast(BirthDate as varchar)      as name,
+       convert(varchar, HireDate, 104)                  as hired,
+       isnull(cast(ReportsTo as varchar), 'no manager') as manager
 from Employees;
 
 
 -- join ======================================================================================
+select *
+from Categories;
+select *
+from Products;
+select *
+from Suppliers;
+select *
+from Orders;
+
+-- 1
+select *
+from Products
+         join Categories
+              on Products.CategoryID = Categories.CategoryID;
+
+-- 2
+select ProductName, CompanyName
+from Products p
+         join Suppliers S on p.SupplierID = S.SupplierID;
+
+-- 3
+select OrderID, CompanyName
+from Orders o
+         join Customers C on o.CustomerID = C.CustomerID
+where CompanyName like 'a%';
+
+-- 4
+select r.RegionDescription, t.TerritoryDescription
+from Region r
+         join Territories t on r.RegionID = t.RegionID;
+
+-- 5
+select top 5 p.ProductName, p.UnitPrice, c.CategoryName
+from Products p
+         join Categories c on p.CategoryID = c.CategoryID
+where p.UnitPrice > 50;
+
+-- 6
+select *
+from Products p
+         join Categories C on p.CategoryID = C.CategoryID
+where ProductID = 3;
+
+-- 7
+select SupplierID, sum(UnitPrice) as totProfit
+from Products p
+         join Categories C on p.CategoryID = C.CategoryID
+group by SupplierID
+order by totProfit desc;
+
+
 
