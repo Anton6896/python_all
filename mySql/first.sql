@@ -128,6 +128,12 @@ select FirstName, Region
 from Employees
 where Region IS NULL;
 
+
+-- 13
+select top 3 ProductName, UnitPrice
+from Products
+order by UnitPrice desc;
+
 -- 14
 select OrderID, OrderDate, RequiredDate
 from Orders
@@ -183,6 +189,11 @@ where SupplierID in (21, 8, 16)
    or UnitPrice > 10
     and UnitsInStock not between 10 and 100
 order by UnitPrice;
+
+
+select FirstName + ' ' + LastName as name, BirthDate as date
+from Employees
+order by 1 desc; -- desc order for first column
 
 
 /* scalar functions  ================================================== */
