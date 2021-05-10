@@ -1,7 +1,7 @@
 use Northwind;
 
 /*
-    using MSSQL (whyyy)
+    using MSSQL
     because of half in eng and half in Heb is cant be cp properly
     so will bw only q num
 */
@@ -344,6 +344,16 @@ order by OrderID;
 
 
 -- group by =====================================================================================
+
+-- smallest name in column
+
+select LastName
+from (
+         select top 1 len(LastName) as leng, LastName
+         from Employees
+         order by leng
+     ) as tmp;
+
 
 
 
