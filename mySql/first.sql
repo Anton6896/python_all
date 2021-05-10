@@ -1,10 +1,9 @@
 use Northwind;
 
 /*
-    using MSSQL (bad bad idea, but it is what it is)
+    using MSSQL
     because of half in eng and half in Heb is cant be cp properly
     so will bw only q num
-
 */
 
 
@@ -128,6 +127,12 @@ select FirstName, Region
 from Employees
 where Region IS NULL;
 
+
+-- 13
+select top 3 ProductName, UnitPrice
+from Products
+order by UnitPrice desc;
+
 -- 14
 select OrderID, OrderDate, RequiredDate
 from Orders
@@ -185,6 +190,12 @@ where SupplierID in (21, 8, 16)
 order by UnitPrice;
 
 
+select FirstName + ' ' + LastName as name, BirthDate as date
+from Employees
+order by 1 desc;
+-- desc order for first column
+
+
 /* scalar functions  ================================================== */
 
 -- 1
@@ -225,5 +236,222 @@ from Products;
 select ProductID, round(UnitPrice * 0.12, 0) as "*0.12"
 from Products;
 
+-- 9
+select cast(EmployeeID as varchar) + ' ' + LastName as entry
+from Employees;
 
+-- 10
+select upper(LastName) as Lname, format(BirthDate, 'dd/MM/yy') as date
+from Employees
+where substring(LastName, 1, 1) in ('K', 'D');
+
+
+-- 11
+select cast(ProductID as varchar) + ' and ' + cast(SupplierID as varchar) as product,
+       FLOOR(UnitPrice * 1.165)                                           as fullPrice
+from Products
+where FLOOR(UnitPrice * 1.165) > 40;
+
+-- 12
+select cast(len(FirstName) as varchar) + ' ' + FirstName as Fname,
+       cast(len(LastName) as varchar) + ' ' + LastName   as Fname
+from Employees;
+
+-- 15
+select *
+from Employees;
+
+select LastName + ' ' + cast(BirthDate as varchar)      as name,
+       convert(varchar, HireDate, 104)                  as hired,
+       isnull(cast(ReportsTo as varchar), 'no manager') as manager
+from Employees;
+
+
+-- join ======================================================================================
+
+-- 1
+select *
+from Products
+         join Categories
+              on Products.CategoryID = Categories.CategoryID;
+
+-- 2
+select ProductName, CompanyName
+from Products p
+         join Suppliers S on p.SupplierID = S.SupplierID;
+
+-- 3
+select OrderID, CompanyName
+from Orders o
+         join Customers C on o.CustomerID = C.CustomerID
+where CompanyName like 'a%';
+
+-- 4
+select r.RegionDescription, t.TerritoryDescription
+from Region r
+         join Territories t on r.RegionID = t.RegionID;
+
+-- 5
+select top 5 p.ProductName, p.UnitPrice, c.CategoryName
+from Products p
+         join Categories c on p.CategoryID = c.CategoryID
+where p.UnitPrice > 50;
+
+-- 6
+select *
+from Products p
+         inner join Categories C on p.CategoryID = C.CategoryID
+where ProductID = 3;
+
+-- 7
+select SupplierID, sum(UnitPrice) as totProfit
+from Products p
+         join Categories C on p.CategoryID = C.CategoryID
+group by SupplierID
+order by totProfit desc;
+
+-- 8
+select Orders.OrderID,
+       Orders.CustomerID,
+       ProductID,
+       UnitPrice,
+       Quantity,
+       Discount,
+       (UnitPrice * Quantity) - Discount as totPrice
+from Orders
+         join [Order Details] on Orders.OrderID = [Order Details].OrderID
+where Orders.OrderID between 10250 and 10260
+order by totPrice desc;
+
+-- 9
+select od.OrderID, od.Quantity, ProductName
+from [Order Details] od
+         join Products P on od.ProductID = P.ProductID
+where Quantity > 50;
+
+-- 10
+select OrderID, ShipperID, CompanyName
+from Orders o
+         join Shippers S on o.ShipVia = S.ShipperID
+where CompanyName like '[S,U]%'
+
+-- 11
+select *
+from Orders o
+         join Employees E on o.EmployeeID = E.EmployeeID
+where City in ('London', 'Redmond')
+order by OrderID;
+
+-- 12
+select *
+from Orders o
+         join Shippers S on o.ShipVia = S.ShipperID
+where ShipRegion is not null
+  and datepart(year, ShippedDate) = 1997;
+
+
+-- order is os null means that they newer ordered
+-- to customers add orders and show orders that have null (left join will add null if not exists)
+select *
+from Customers c
+         left join Orders o on c.CustomerID = o.CustomerID
+where OrderID is null;
+
+
+-- 14  -- order on same address as costumes
+select o.OrderID, o.ShipAddress, c.Address
+from Orders o
+         join Customers C on o.CustomerID = C.CustomerID
+where o.ShipAddress = C.Address;
+
+-- 16
+select OrderID, CompanyName
+from Customers c
+         left join Orders o on c.CustomerID = o.CustomerID;
+
+
+-- group by =====================================================================================
+
+select LastName -- smallest name that employee have (by amount of chars)
+from (
+         select top 1 len(LastName) as leng, LastName
+         from Employees
+         order by leng
+     ) as tmp;
+
+
+-- 6
+select max(UnitPrice) as maxPrice, avg(UnitPrice) as avePrice
+from Products;
+
+
+--7
+select convert(varchar, min(BirthDate), 113) as min,
+       convert(varchar, max(BirthDate), 113) as max
+from Employees;
+
+-- 9
+select count(distinct CustomerID) as idAmount
+from Orders;
+
+-- 10
+select CategoryID, max(UnitPrice) as maxPrice, min(UnitPrice) as minPrice, avg(UnitPrice) as avgPrice
+from Products
+group by CategoryID;
+
+-- 11
+select SupplierID, max(UnitPrice) as maxPrice
+from Products
+group by SupplierID
+order by maxPrice desc;
+
+
+-- 16
+select max(UnitPrice)   maxPrice,
+       min(UnitPrice)   minPrice,
+       avg(UnitPrice)   avgPrice,
+       count(ProductID) prodAmount
+from Products
+group by CategoryID, SupplierID;
+
+-- 17
+select max(UnitPrice) as maxPrice, CategoryID
+from Products
+group by CategoryID
+having max(UnitPrice) > 40;
+
+-- 18
+select avg(UnitPrice) avgPrice
+from Products
+group by SupplierID
+having avg(UnitPrice) > 40;
+
+
+-- 19
+select sum(UnitsOnOrder) uio, sum(UnitsInStock) uis, Categories.CategoryID, Categories.CategoryName
+from Products
+         join Categories on Products.CategoryID = Categories.CategoryID
+where CategoryName like '%C%' -- reg check
+group by Categories.CategoryID, Categories.CategoryName
+having sum(Products.UnitsOnOrder) > 100 -- using aggregate with having
+order by CategoryName;
+
+-- 20
+select City, Region, count(CustomerID) as idSum
+from Customers
+where City like '%[M,L]%'
+  and Region is not null
+group by Region, City
+having count(CustomerID) = 2
+    or count(CustomerID) > 2;
+
+-- 21
+select LastName, count(*) as totOrders, max(OrderDate) lastOrder
+from Employees E
+         join Orders O on E.EmployeeID = O.EmployeeID
+group by E.EmployeeID, LastName
+having count(*) > 100;
+
+
+-- subquery ======================================================================================
 
