@@ -268,14 +268,6 @@ from Employees;
 
 
 -- join ======================================================================================
-select *
-from Categories;
-select *
-from Products;
-select *
-from Suppliers;
-select *
-from Orders;
 
 -- 1
 select *
@@ -317,6 +309,43 @@ from Products p
          join Categories C on p.CategoryID = C.CategoryID
 group by SupplierID
 order by totProfit desc;
+
+-- 8
+select Orders.OrderID,
+       Orders.CustomerID,
+       ProductID,
+       UnitPrice,
+       Quantity,
+       Discount,
+       (UnitPrice * Quantity) - Discount as totPrice
+from Orders
+         join [Order Details] on Orders.OrderID = [Order Details].OrderID
+where Orders.OrderID between 10250 and 10260
+order by totPrice desc;
+
+-- 9
+select od.OrderID, od.Quantity, ProductName
+from [Order Details] od
+         join Products P on od.ProductID = P.ProductID
+where Quantity > 50;
+
+-- 10
+select OrderID, ShipperID, CompanyName
+from Orders o
+         join Shippers S on o.ShipVia = S.ShipperID
+where CompanyName like '[S,U]%'
+
+-- 11
+select *
+from Orders o
+         join Employees E on o.EmployeeID = E.EmployeeID
+where City in ('London', 'Redmond')
+order by OrderID;
+
+
+-- group by =====================================================================================
+
+
 
 
 
