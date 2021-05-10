@@ -366,20 +366,23 @@ where o.ShipAddress = C.Address;
 
 -- 16
 select OrderID, CompanyName
-from Customers c  left join Orders o on c.CustomerID = o.CustomerID;
-
+from Customers c
+         left join Orders o on c.CustomerID = o.CustomerID;
 
 
 -- group by =====================================================================================
 
--- smallest name in column
-
-select LastName
+select LastName -- smallest name that employee have (by amount of chars)
 from (
          select top 1 len(LastName) as leng, LastName
          from Employees
          order by leng
      ) as tmp;
+
+
+-- 6
+select max(UnitPrice) as maxPrice, avg(UnitPrice) as avePrice
+from Products;
 
 
 --7
@@ -392,6 +395,64 @@ select count(distinct CustomerID) as idAmount
 from Orders;
 
 -- 10
+select CategoryID, max(UnitPrice) as maxPrice, min(UnitPrice) as minPrice, avg(UnitPrice) as avgPrice
+from Products
+group by CategoryID;
+
+-- 11
+select SupplierID, max(UnitPrice) as maxPrice
+from Products
+group by SupplierID
+order by maxPrice desc;
+
+
+-- 16
+select max(UnitPrice)   maxPrice,
+       min(UnitPrice)   minPrice,
+       avg(UnitPrice)   avgPrice,
+       count(ProductID) prodAmount
+from Products
+group by CategoryID, SupplierID;
+
+-- 17
+select max(UnitPrice) as maxPrice, CategoryID
+from Products
+group by CategoryID
+having max(UnitPrice) > 40;
+
+-- 18
+select avg(UnitPrice) avgPrice
+from Products
+group by SupplierID
+having avg(UnitPrice) > 40;
+
+
+-- 19
+select sum(UnitsOnOrder) uio, sum(UnitsInStock) uis, Categories.CategoryID, Categories.CategoryName
+from Products
+         join Categories on Products.CategoryID = Categories.CategoryID
+where CategoryName like '%C%' -- reg check
+group by Categories.CategoryID, Categories.CategoryName
+having sum(Products.UnitsOnOrder) > 100 -- using aggregate with having
+order by CategoryName;
+
+-- 20
+select City, Region, count(CustomerID) as idSum
+from Customers
+where City like '%[M,L]%'
+  and Region is not null
+group by Region, City
+having count(CustomerID) = 2
+    or count(CustomerID) > 2;
+
+-- 21
+select LastName, count(*) as totOrders, max(OrderDate) lastOrder
+from Employees E
+         join Orders O on E.EmployeeID = O.EmployeeID
+group by E.EmployeeID, LastName
+having count(*) > 100;
+
+
 
 
 
