@@ -1,10 +1,9 @@
 use Northwind;
 
 /*
-    using MSSQL (bad bad idea, but it is what it is)
+    using MSSQL (whyyy)
     because of half in eng and half in Heb is cant be cp properly
     so will bw only q num
-
 */
 
 
@@ -193,7 +192,8 @@ order by UnitPrice;
 
 select FirstName + ' ' + LastName as name, BirthDate as date
 from Employees
-order by 1 desc; -- desc order for first column
+order by 1 desc;
+-- desc order for first column
 
 
 /* scalar functions  ================================================== */
@@ -236,5 +236,36 @@ from Products;
 select ProductID, round(UnitPrice * 0.12, 0) as "*0.12"
 from Products;
 
+-- 9
+select cast(EmployeeID as varchar) + ' ' + LastName as entry
+from Employees;
 
+-- 10
+select upper(LastName) as Lname, format(BirthDate, 'dd/MM/yy') as date
+from Employees
+where substring(LastName, 1, 1) in ('K', 'D');
+
+
+-- 11
+select cast(ProductID as varchar) + ' and ' + cast(SupplierID as varchar) as product,
+       FLOOR(UnitPrice * 1.165)                                           as fullPrice
+from Products
+where FLOOR(UnitPrice * 1.165) > 40;
+
+-- 12
+select cast(len(FirstName) as varchar) + ' ' + FirstName as Fname,
+       cast(len(LastName) as varchar) + ' ' + LastName   as Fname
+from Employees;
+
+-- 15
+select *
+from Employees;
+
+select LastName + ' ' + cast(BirthDate as varchar)       as name,
+       convert(varchar, HireDate, 104)                   as hired,
+       isnull(convert(varchar, ReportsTo), 'no manager') as manager
+from Employees;
+
+
+-- join ======================================================================================
 
