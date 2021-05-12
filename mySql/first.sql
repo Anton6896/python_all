@@ -563,6 +563,25 @@ where CategoryID in (
 );
 
 
+-- 11
+select distinct CompanyName
+from Products p
+         join Categories C on p.CategoryID = C.CategoryID
+         join Suppliers S on p.SupplierID = S.SupplierID
+where CategoryName = 'Beverages';
+
+
+select CompanyName -- without distinct so its faster !
+from Suppliers
+where SupplierID in (
+    select Products.SupplierID
+    from Products
+    where CategoryID in (
+        select Categories.CategoryID
+        from Categories
+        where CategoryName = 'Beverages'
+    )
+);
 
 
 
