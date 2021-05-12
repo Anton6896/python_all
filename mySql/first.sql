@@ -455,3 +455,119 @@ having count(*) > 100;
 
 -- subquery ======================================================================================
 
+
+-- 1
+select *
+from Products
+where UnitPrice < (
+    select UnitPrice
+    from Products
+    where ProductID = 8
+);
+
+-- 2
+select *
+from Products
+where UnitPrice > (
+    select UnitPrice
+    from Products
+    where ProductName = 'Tofu'
+);
+
+-- 3
+select FirstName, HireDate
+from Employees
+where HireDate > (
+    select HireDate
+    from Employees
+    where EmployeeID = 6
+);
+
+
+-- 4
+select ProductID, ProductName, UnitPrice
+from Products
+where UnitPrice > (
+    select avg(UnitPrice) as avgUp
+    from Products
+);
+
+-- 5
+select ProductName, UnitsInStock
+from Products
+where UnitsInStock < (
+    select min(UnitsInStock) as uis
+    from Products
+    where CategoryID = 5
+)
+  and UnitsInStock > 0;
+
+-- 6
+select *
+from Products
+where CategoryID = (
+    select CategoryID
+    from Products
+    where ProductName = 'Chai'
+)
+order by UnitPrice;
+
+
+-- 7
+select *
+from Products
+where UnitPrice in (
+    select UnitPrice
+    from Products
+    where CategoryID = 5
+);
+
+-- 8
+select OrderID, OrderDate
+from Orders
+where OrderID in (
+    select OrderID
+    from Orders
+    where ShipCountry in ('France', 'Germany', 'Sweden')
+      and datepart(year, OrderDate) = 1997
+);
+
+-- 9
+select *
+from Products
+where UnitPrice > (
+    select avg(UnitPrice) up
+    from Products
+    where UnitsInStock > 50
+);
+
+-- 10  -- what is productive way ?
+select *
+from Products p
+         join Categories c on p.CategoryID = c.CategoryID
+         join Suppliers S on p.SupplierID = S.SupplierID
+where c.CategoryName in ('Beverages', 'Condiments')
+  and Region is null;
+
+select *
+from Products
+where CategoryID in (
+    select CategoryID
+    from Categories
+    where CategoryName in ('Beverages', 'Condiments')
+)
+  and SupplierID in (
+    select Suppliers.SupplierID
+    from Suppliers
+    where Region is null
+);
+
+
+
+
+
+
+
+
+
+
