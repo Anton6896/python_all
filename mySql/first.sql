@@ -583,9 +583,50 @@ where SupplierID in (
     )
 );
 
+-- DML ================================================================================================
+Begin transaction
+
+CREATE TABLE my_employees
+(
+    id     INt PRIMARY KEY,
+    name   VARCHAR(50),
+    title  VARCHAR(50),
+    deptid INT,
+    salary MONEY DEFAULT 3500
+);
+
+select *
+from my_employees;
+
+insert into my_employees
+values (2, 'miriam', 'manager', 20, 3750),
+       (3, 'aion', 'oper manager ', 30, null),
+       (4, 'baruh', null, 30, 3500),
+       (5, 'danny', 'sales', 30, 7000);
 
 
+update my_employees
+set salary=4500
+where id = 2;
 
+update my_employees
+set name='new4name'
+where id = 4;
+
+update my_employees
+set deptid=10
+where deptid = 30;
+
+delete my_employees
+where name = 'aion';
+
+
+insert into my_employees (id, name, title)
+select EmployeeID, FirstName, title
+from Employees
+where EmployeeID > 5;
+
+Commit
 
 
 
