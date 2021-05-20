@@ -598,6 +598,15 @@ CREATE TABLE my_employees
 select *
 from my_employees;
 
+insert into my_employees (id, name, title, deptid)
+values (43, '44', '44', 44);
+
+select *
+from my_employees
+where id > 1
+  and id < 4;
+
+
 insert into my_employees
 values (2, 'miriam', 'manager', 20, 3750),
        (3, 'aion', 'oper manager ', 30, null),
@@ -628,6 +637,13 @@ where EmployeeID > 5;
 
 Commit
 
+select FirstName, substring(FirstName, 1, 3) as kk
+from Employees;
 
 
+select *
+from Products
+where UnitPrice > (select avg(UnitPrice) from Products)
 
+select distinct City, FirstName
+from Employees;
