@@ -3,6 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/db/mssql/first.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/db/mssql/pop.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/db/psql_my/game.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/db/psql_my_queries_plus/game.sql" dialect="PostgreSQL" />
   </component>
 </project>
