@@ -79,3 +79,5 @@ from annual
 group by units, ind_code
 having count(*) > 40
 order by ind_code;
+
+select * from  annual;
