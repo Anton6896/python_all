@@ -22,7 +22,6 @@ def pr():
             print(i)
 
 
-
 if __name__ == "__main__":
     logging.debug("start")
     pr()

@@ -1,4 +1,5 @@
 from threading import Event, Thread
+
 event = Event()
 
 
@@ -12,6 +13,6 @@ if __name__ == "__main__":
     t1 = Thread(target=working)
     t1.start()
 
-    if (input("enter y/n -->  ") == 'y'):
+    if input("enter y/n -->  ") == 'y':
         print("got trigger")
         event.set()

@@ -3,7 +3,6 @@ import os
 import logging
 import openpyxl
 
-
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -44,7 +43,6 @@ def edit_excel_file():
     print(sheet_.cell(1, 1).value)  # none 
 
     wb.save('my_book.xlsx')
-
 
 
 if __name__ == "__main__":

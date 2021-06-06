@@ -1,4 +1,3 @@
-
 # basic if
 def switch_regular(operation, x, y):
     if operation == 'add':
@@ -9,15 +8,18 @@ def switch_regular(operation, x, y):
         return None
 
 
+def printing_name(name):
+    print(name)
+
+
 # new great switch
-def switch_good(operation, x, y):
+def switch_good(operation, x=0, y=0):
     return {
         'add': lambda: x + y,
         'sub': lambda: x - y,
     }.get(operation, lambda: 'no option')()  # <- all as a function
 
 
-if '__main__' == __name__:
-    print(switch_regular('add', 2, 3))
+if __name__ == '__main__':
     print(switch_good('add', 2, 3))
 

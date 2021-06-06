@@ -34,9 +34,7 @@ class BasicPQ:
             exit(1)
 
 
-
 if __name__ == "__main__":
-
     # q = BasicPQ()
     # q.push(2)
     # q.push(5)
@@ -49,17 +47,17 @@ if __name__ == "__main__":
     #     print(q.pop, end=" ")
     # print()
 
-    # li = [12, 6, 2, 56, 7, 3, 11]
+    li = [12, 6, 2, 56, 7, 3, 11]
     # print(f'before heapify : {li}')
 
-    # heapq.heapify(li)  # create binary heap
-    # print(f'created heap is : {li}')
-    # heapq.heappush(li, 4)
-    # print(f'after pushing : {li}')
+    heapq.heapify(li)  # create binary heap
+    print(f'created heap from : {li}')
+    heapq.heappush(li, 4)
+    print(f'after pushing : {li}')
 
-    # print(heapq.heappop(li))
-    # print(heapq.heappop(li))
-    # print(heapq.heappop(li))
-    # print(heapq.heappop(li))
+    print(heapq.heappop(li))
+    print(heapq.heappop(li))
+    print(heapq.heappop(li))
+    print(heapq.heappop(li))
 
-    # print(li)
+    print(li)
