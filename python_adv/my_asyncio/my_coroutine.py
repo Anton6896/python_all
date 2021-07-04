@@ -17,6 +17,18 @@ python -i my_coroutine.py
 
 """
 
+
+def coroutine_dec(func):
+    # init decorator 
+    def inner(*args, **kwargs):
+        g = func(*args, **kwargs)
+        g.send(None)
+        return g
+
+    return inner
+
+
+@coroutine_dec
 def average_in():
     my_count = 0
     my_sum = 0
@@ -24,10 +36,11 @@ def average_in():
 
     while True:
         try:
+            # yield will always return new agerage value
             x = yield my_average
-        except Exception:
+        except StopIteration:
             print('reg exception')
-        
+
         # g.throw(SomeException)
         except SomeException:
             print('some data -------------')
