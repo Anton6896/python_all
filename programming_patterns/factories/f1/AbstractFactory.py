@@ -70,7 +70,6 @@ class HotDrinkMachine:
 
 
 if __name__ == "__main__":
-
     hdm = HotDrinkMachine()
     dirink = hdm.make_drink()
     dirink.consume()
