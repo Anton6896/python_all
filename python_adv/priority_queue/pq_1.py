@@ -37,7 +37,7 @@ class BasicPQ:
 
 if __name__ == "__main__":
 
-    # q = BasicPQ()
+    q = BasicPQ()
     # q.push(2)
     # q.push(5)
     # q.push(1)

@@ -5,8 +5,8 @@ class Db:
     _instance = None
 
     def __init__(self):
-        id = random.randint(1, 100)
-        print('id = ', id)
+        self.id = random.randint(1, 100)
+        print('id = ', self.id)
 
     # running before __init__
     def __new__(cls, *args, **kwargs):

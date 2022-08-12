@@ -17,7 +17,8 @@ def switch_good(operation, x, y):
     }.get(operation, lambda: 'no option')()  # <- all as a function
 
 
-if '__main__' == __name__:
+if __name__ == '__main__':
     print(switch_regular('add', 2, 3))
-    print(switch_good('add', 2, 3))
+    print(switch_good('del', 2, 3))
+
 
