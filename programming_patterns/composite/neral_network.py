@@ -3,10 +3,10 @@ from collections.abc import Iterable
 
 
 class Connectable(Iterable, ABC):
-    def connect_to(self, other: list):
+    def connect_to(self, other):
         if self == other:
             return
-        
+
         for s in self:
             for o in other:
                 s.outputs.append(o)
@@ -17,17 +17,18 @@ class Neuron(Connectable):
     """
     single Neuron
     """
+
     def __init__(self, name) -> None:
         super().__init__()
 
         self.name = name
         self.inputs = []
         self.outputs = []
-    
+
     # will make it iterable
     def __iter__(self):
         yield self
-    
+
     def __str__(self):
         return f'{self.name}, {len(self.inputs)} inputs, {len(self.outputs)} outputs'
 
@@ -36,6 +37,7 @@ class NeuronLayer(list, Connectable):
     """
     contains list of Neurons 
     """
+
     def __init__(self, name, count):
         super().__init__()
 
@@ -45,6 +47,7 @@ class NeuronLayer(list, Connectable):
 
     def __str__(self):
         return f'{self.name} with {len(self)} neurons'
+
 
 if __name__ == '__main__':
     neuron1 = Neuron('n1')
