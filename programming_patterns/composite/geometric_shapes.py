@@ -1,7 +1,7 @@
 class GraphicObject:
     def __init__(self, color: str = None):
         self.color = color
-        self.children: [GraphicObject, ...] = []
+        self.children: list[GraphicObject] = []
         self._name = 'Group'
 
     @property
