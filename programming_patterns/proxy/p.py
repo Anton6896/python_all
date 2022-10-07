@@ -6,6 +6,7 @@ class Bitmap:
     def draw(self):
         print(f'drawing some image : {self.name}')
 
+
 class LazyImage(Bitmap):
     def __init__(self, name) -> None:
         super().__init__(name)
@@ -16,10 +17,12 @@ class LazyImage(Bitmap):
             self.bitmap = Bitmap(self.name)
         self.bitmap.draw()
 
+
 def draw_image(image: Bitmap):
     print('before draw image')
     image.draw()
     print('after draw image')
+
 
 if __name__ == '__main__':
     # only one load for image data
