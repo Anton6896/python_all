@@ -10,10 +10,10 @@ class Creature:
 
 class CreatureModifier:
     def __init__(self, creature: Creature) -> None:
-        self.next_modifier = None # chine of modifiers 
+        self.next_modifier: 'CreatureModifier' = None # chine of modifiers 
         self.creature = creature
 
-    def add_modifier(self, modifier):
+    def add_modifier(self, modifier: 'CreatureModifier'):
         if self.next_modifier:
             self.next_modifier.add_modifier(modifier)
         else:
