@@ -1,6 +1,3 @@
-from logging import root
-
-
 class Creature:
     def __init__(self, name: str, attack: int, defense: int) -> None:
         self.name = name
@@ -9,6 +6,7 @@ class Creature:
     
     def __str__(self) -> str:
         return f'{self.name} {self.attack}/{self.defense}'
+
 
 class CreatureModifier:
     def __init__(self, creature: Creature) -> None:
@@ -38,6 +36,7 @@ class IncreaseDefenseModifire(CreatureModifier):
         print(f'Incising {self.creature.name} - defense ')
         self.creature.defense += 1
         return super().handle()
+
 
 if __name__ == '__main__':
     goblin = Creature('goblin', 1, 1)
