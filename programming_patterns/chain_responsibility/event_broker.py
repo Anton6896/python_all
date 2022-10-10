@@ -1,16 +1,18 @@
 from enum import Enum, auto
 from typing import Any
+from abc import ABC
 
 
 class OptionsQ(Enum):
-    ATTACK = auto
-    DEFENSE = auto
+    ATTACK = 1
+    DEFENSE = 2
 
 
 # events queue
 class Event(list):
     def __call__(self, *args: Any, **kwds: Any) -> Any:
         for item in self:
+            print(item)
             item(*args, **kwds)
 
 
@@ -31,33 +33,33 @@ class Query:
 
 
 class Creature:
-    def __init__(self, game: EventBroker, name: str, attack: int, defense: int) -> None:
+    def __init__(self, event_broker: EventBroker, name: str, attack: int, defense: int) -> None:
         self.init_defense = defense
         self.init_attack = attack
         self.name = name
-        self.game = game
+        self.event_broker = event_broker
 
     @property
     def attack(self):
         q = Query(self.name, OptionsQ.ATTACK, self.init_attack)
-        self.game.perform_query(sender=self, query=q)
+        self.event_broker.perform_query(sender=self, query=q)
         return q.value
 
     @property
     def defense(self):
         q = Query(self.name, OptionsQ.DEFENSE, self.init_defense)
-        self.game.perform_query(self, q)
+        self.event_broker.perform_query(sender=self, query=q)
         return q.value
 
     def __str__(self):
         return f'{self.name} ({self.attack}/{self.defense})'
 
 
-class CreatureModifier:
-    def __init__(self, game: EventBroker, creature: Creature) -> None:
-        self.game = game
+class CreatureModifier(ABC):
+    def __init__(self, event_broker: EventBroker, creature: Creature) -> None:
+        self.event_broker = event_broker
         self.creature = creature
-        self.game.queries.append(self.handle)
+        self.event_broker.queries.append(self.handle)
 
     def handle(self, sender, query):
         ...
@@ -66,7 +68,7 @@ class CreatureModifier:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.game.queries.remove(self.handle)
+        self.event_broker.queries.remove(self.handle)
 
 
 class DoubleAttackModifier(CreatureModifier):
@@ -77,22 +79,21 @@ class DoubleAttackModifier(CreatureModifier):
 
 
 class IncreaseDefenseModifier(CreatureModifier):
-
     def handle(self, sender, query):
         if (sender.name == self.creature.name and
                 query.what_to_query == OptionsQ.DEFENSE):
-            query.value += 3
+            query.value += 1
 
 
 if __name__ == '__main__':
-    game = EventBroker()
-    goblin = Creature(game, 'amazing Goblin', 2, 2)
+    event_broker = EventBroker()
+    goblin = Creature(event_broker, 'amazing Goblin', 2, 2)
     print(goblin)
 
-    with DoubleAttackModifier(game, goblin):
+    with DoubleAttackModifier(event_broker, goblin):
         print(goblin)
 
-    with IncreaseDefenseModifier(game, goblin):
-        print(goblin)
+    # with IncreaseDefenseModifier(event_broker, goblin):
+    #     print(goblin)
 
     print(goblin)
