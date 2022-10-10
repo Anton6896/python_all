@@ -7,29 +7,31 @@ class OptionsQ(Enum):
     DEFENSE = auto
 
 
+# events queue
 class Event(list):
     def __call__(self, *args: Any, **kwds: Any) -> Any:
         for item in self:
             item(*args, **kwds)
 
 
+# query broker
+class EventBroker:
+    def __init__(self) -> None:
+        self.queries = Event()  # its a list of events
+
+    def perform_query(self, sender: 'Creature', query: 'Query'):
+        self.queries(sender, query)
+
+
 class Query:
-    def __init__(self, creature_name: str, what_to_query: OptionsQ, default_value: int) -> None:
+    def __init__(self, creature_name: str, what_to_query: OptionsQ, default_value: int = 1) -> None:
         self.value = default_value
         self.what_to_query = what_to_query
         self.creature_name = creature_name
 
 
-class Game:
-    def __init__(self) -> None:
-        self.queries = Event()  # its a list of events
-
-    def perform_query(self, sender: 'Creature', query: Query):
-        self.queries(sender, query)
-
-
 class Creature:
-    def __init__(self, game: Game, name: str, attack: int, defense: int) -> None:
+    def __init__(self, game: EventBroker, name: str, attack: int, defense: int) -> None:
         self.init_defense = defense
         self.init_attack = attack
         self.name = name
@@ -52,7 +54,7 @@ class Creature:
 
 
 class CreatureModifier:
-    def __init__(self, game: Game, creature: Creature) -> None:
+    def __init__(self, game: EventBroker, creature: Creature) -> None:
         self.game = game
         self.creature = creature
         self.game.queries.append(self.handle)
@@ -83,7 +85,7 @@ class IncreaseDefenseModifier(CreatureModifier):
 
 
 if __name__ == '__main__':
-    game = Game()
+    game = EventBroker()
     goblin = Creature(game, 'amazing Goblin', 2, 2)
     print(goblin)
 
