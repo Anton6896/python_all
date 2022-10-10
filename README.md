@@ -2,4 +2,3 @@
 * Dynamic programing approach (freeCodeCamp.org) [link](https://www.youtube.com/watch?v=oBt53YbR9Kk&list=WL&index=2&t=1407s&ab_channel=freeCodeCamp.org)
 * Design patterns by Udemy course (Dmitri Nesteruk) [Udemy](https://www.udemy.com/course/design-patterns-python/learn/lecture/13621164#overview) 
 * data structure (actual on java  (freeCodeCamp.org) ) [link](https://www.youtube.com/watch?v=RBSGKlAvoiM&t=2207s&ab_channel=freeCodeCamp.org)
-
