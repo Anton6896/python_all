@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    background: black;
+    margin: 10px;
+    color: white;
+}
+
+.flex-container {
+    display: flex;
+    background-color: aliceblue;
+    justify-content: center;
+}

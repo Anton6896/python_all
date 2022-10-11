@@ -12,7 +12,6 @@ class OptionsQ(Enum):
 class Event(list):
     def __call__(self, *args: Any, **kwds: Any) -> Any:
         for item in self:
-            print(item)
             item(*args, **kwds)
 
 
