@@ -10,11 +10,11 @@ class Token:
         L_PAREN = 3
         R_PAREN = 4
         SPACE = 5
-    
+
     def __init__(self, type: Type, text: str) -> None:
         self.type = type
         self.text = text
-    
+
     def __str__(self) -> str:
         return f'{self.text}'
 
@@ -38,29 +38,26 @@ def lex(input: str) -> list[Token]:
             acc.append(Token(Token.Type.SPACE, input[i]))
 
         # check numbers
-        else:  
+        else:
             digits = [input[i], ]
             for j in range(i + 1, len(input)):
-                print(digits)
                 if input[j].isdigit():
                     digits.append(input[j])
                     i += 1
                 else:
-                    acc.append(Token(Token.Type.INTEGER, ''.join(digits)))
-                    digits = []
-                break
-            
-            if digits:
-                acc.append(Token(Token.Type.INTEGER, ''.join(digits)))
+                    break
+            acc.append(Token(Token.Type.INTEGER, ''.join(digits)))
 
         i += 1
 
     return acc
 
 
+def calc(input):
+    tokens = lex(input)
+    print(''.join(map(str, tokens)))
+
+
 if __name__ == '__main__':
     exp = '(1+2) - 3'
-    l = lex(exp)
-    for i in l:
-        print(i, end='')
-    print()
+    calc(exp)
