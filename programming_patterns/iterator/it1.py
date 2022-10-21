@@ -15,8 +15,8 @@ class Node:
 
 
 class InOrderIterator:
-    def __init__(self, root):
-        self.root = self.current = root
+    def __init__(self, root_):
+        self.root = self.current = root_
         self.yielded_start = False
 
         while self.current.left:
