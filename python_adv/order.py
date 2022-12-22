@@ -5,15 +5,7 @@
 def html_tag(tag):
     def mess(mess):
         print(f"\t<{tag}> {mess} </{tag}>")
-
     return mess
-
-
-html_h1 = html_tag('h1')
-html_h1('new message here')
-
-html_h3 = html_tag('p')
-html_h3('message other')
 
 
 """  closures (is an inner function that have an access to the free variables ) """
@@ -36,5 +28,9 @@ def outher(var):
 first = outher('hello')
 second = outher('world')
 
-first()
-second()
+if __name__ == '__main__':
+    html_h1 = html_tag('h1')
+    html_h1('new message here')
+
+    first()
+    second()
