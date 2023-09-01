@@ -25,12 +25,11 @@ class Action:
 
     @staticmethod
     def get_available_actions():
-        return ('+', '-', '*', '/', '(', ')')
+        return ('+', '-', '*', '/')
 
     @property
-    def is_add(self):
-        return self.type_of == '+'
-
+    def is_priority_action(self) -> bool:
+        return self.type_of in ['*', '/']
 
 
 class Calculator:
@@ -42,8 +41,6 @@ class Calculator:
         FAILURE = auto()
         CONCLUSION = auto()
 
-    AVAILABLE_ACTIONS = ('+', '-', '*', '/', '(', ')')
-
     def __init__(self, expression: str) -> None:
         self.expression = expression
         self.state = None
@@ -54,6 +51,8 @@ class Calculator:
         try:
             self.tokenize()
             self._run()
+            if self.calculation_state:
+                self.response = self.calculation_state[0].value
             return self.response or self.expression
         except Exception as e:  # todo
             raise
@@ -87,32 +86,64 @@ class Calculator:
             print('loop -------')
             have_actions = False
 
+            idx = 0
+            while idx < len(self.calculation_state):
+                token = self.calculation_state[idx]
+                if isinstance(token, Action) and token.is_priority_action:
+                    have_actions = True
+                    self.handle_action(idx, token)
+                    idx -= 1
+                else:
+                    idx += 1
+
+            idx = 0
+            while idx < len(self.calculation_state):
+                token = self.calculation_state[idx]
+                if isinstance(token, Action):
+                    have_actions = True
+                    self.handle_action(idx, token)
+                    idx -= 1
+                else:
+                    idx += 1
+
+            """
             for idx, token in enumerate(self.calculation_state):
 
-                if isinstance(token, Action) and token.is_add:
+                if isinstance(token, Action) and token.is_priority_action:
                     have_actions = True
-                    self.handle_add(idx, token, self.calculation_state)
-                    print('result: ', self.calculation_state)
+                    self.handle_action(idx, token)
+                    print('one: ', self.calculation_state)
                     break
 
-                    
+                elif isinstance(token, Action):
+                    have_actions = True
+                    self.handle_action(idx, token)
+                    print('two: ', self.calculation_state)
+                    break
+            """
 
             if not have_actions:
                 self.state = self.State.CONCLUSION
 
-    def handle_add(self, idx, token: Action, current_state: list):
-        left = current_state[idx - 1]
-        right = current_state[idx + 1]
-        result = token.get_action()(left.value, right.value)
-        print('handle_add:', left, right, result)
+    def do_calculation(self, start, end) -> int:
+        for i in range(start, end):
+            token = self.calculation_state[i]
 
-        self.update_calculation_state(result, idx - 1, idx + 1)
+    def handle_action(self, idx, action: Action):
+        left_idx = idx - 1
+        right_idx = idx + 1
+        left: Number = self.calculation_state[left_idx]
+        right: Number = self.calculation_state[right_idx]
+        result = action.get_action()(left.value, right.value)
+        print('result', result)
+        self.update_current_state(result, left_idx, right_idx)
 
-    def update_calculation_state(self, result: float, left: int, right: int):
+    def update_current_state(self, result: float, left: int, right: int):
         new_state = []
 
-        if (left - 1) > 0:
-            new_state.extend(self.calculation_state[::(left - 1)])
+        if (left) > 0:
+            u = self.calculation_state[0:(left)]
+            new_state.extend(u)
 
         new_state.append(Number(result))
 
@@ -120,11 +151,13 @@ class Calculator:
             new_state.extend(self.calculation_state[(right + 1)::])
 
         self.calculation_state = new_state
+        print('new_state', new_state)
         del new_state
 
 
 if __name__ == '__main__':
     # expression = '10 + 2 / ( 4 - 1) + 5'
-    expression = '10 + 2 + 1'
+    expression = '10 + 2 * 3 / 2'
 
     c = Calculator(expression).run()
+    print(c)
