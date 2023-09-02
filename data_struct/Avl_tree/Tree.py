@@ -164,7 +164,7 @@ class Tree:
 if __name__ == '__main__':
     print("avl tree:")
     tree = Tree()
-    root = None
+    root = Node(10)
 
     root = tree.push(root, 10)
     root = tree.push(root, 20)

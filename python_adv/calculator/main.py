@@ -82,13 +82,29 @@ class Tokenizer:
 class Node:
     def __init__(self, token: Token):
         self.token = token
-        self.left = None
-        self.right = None
-        self.parent = None
+        self.left: Node = None
+        self.right: Node = None
+        self.parent: Node = None
         self.height = 1
+
+    def __str__(self):
+        return self.token.value
+
+    def calculate(self):
+        if (
+                self.token.type_of == Token.ACTION
+                and self.left
+                and self.right
+        ):
+            return self.token.use_it()(self.left.token.value, self.right.token.value)
 
     @property
     def weight(self):
+        """
+        numbers:        3
+        actions: *|/    2
+        actions: +|-    1
+        """
         if self.token.type_of == Token.NUMBER:
             return 3
 
@@ -104,47 +120,62 @@ class Tree:
             self.root = new_node
             return self
 
-        # if self.root and not self.root.left:
-        #     self.root.left = new_node
-        #     new_node.parent = self.root
-        #
-        #
-        # elif self.root and not self.root.right:
-        #     ...
-
         current_node: Node = self.get_next_target(self.root)
+        self._push(current_node, new_node)
 
+    def _push(self, current_node, new_node):
         if current_node.weight > new_node.weight:
-            self.new_lightweight(current_node, new_node)
+            self.lighter(current_node, new_node)
 
         elif current_node.weight < new_node.weight:
-            ...
+            self.havier(current_node, new_node)
 
         else:
-            ...
+            self.same_weight(current_node, new_node)
 
-    def new_lightweight(self, target_node: Node, new_node: Node):
-        # handle initial inputs
-        # is root
-        if not target_node.parent and not target_node.left:
-            target_node.parent = new_node
-            new_node.left = target_node
+    def lighter(self, current_node: Node, new_node: Node):
+        # handle initial root left
+        if not current_node.parent and not current_node.left:
             self.root = new_node
+            current_node.parent = self.root
+            self.root.left = current_node
 
-        elif not target_node.parent and not target_node.right:
+        else:
+            self._push(current_node.parent, new_node)
+
+    def havier(self, current_node: Node, new_node: Node):
+        # handle initial root right
+        if not current_node.parent and not current_node.right:
             new_node.parent = self.root
             self.root.right = new_node
+
+    def same_weight(self, current_node: Node, new_node: Node):
+        if current_node == self.root:
+            self.root = new_node
+            current_node.parent = self.root
+            self.root.left = current_node
 
     def calculate_self(self) -> float:
         ...
 
     def get_next_target(self, node: Node) -> Node:
         """
+        math expression left -> to right
         getting most right node
         """
         if node.right:
             return self.get_next_target(node.right)
         return node
+
+    def in_order(self, node: Node = None) -> list:
+        # Left -> Root -> Right
+        res = []
+        if node:
+            res.extend(self.in_order(node.left))
+            res.append(node.token.value)
+            res.extend(self.in_order(node.right))
+
+        return res
 
 
 class Worker:
@@ -171,14 +202,16 @@ class Worker:
                     inner_tree.push(Node(token=token))
                     if token.is_end_parenthesis:
                         inner_result = inner_tree.calculate_self()
-                        main_tree.push(Node(Token(type_of=Token.NUMBER, value=inner_result)))
+                        main_tree.push(Node(token=Token(type_of=Token.NUMBER, value=inner_result)))
                         break
 
             main_tree.push(Node(token=token))
 
+        r = main_tree.in_order(main_tree.root)
+        print(r)
         return main_tree.calculate_self()
 
 
 if __name__ == '__main__':
-    result = Worker('1 + 2').run()
+    result = Worker('1 + 2 -').run()
     print(result)
