@@ -25,11 +25,11 @@ class Action:
 
     @staticmethod
     def get_available_actions():
-        return ('+', '-', '*', '/')
+        return '+', '-', '*', '/'
 
     @property
     def is_priority_action(self) -> bool:
-        return self.type_of in ['*', '/']
+        return self.type_of in ('*', '/')
 
 
 class Calculator:
@@ -105,22 +105,6 @@ class Calculator:
                     idx -= 1
                 else:
                     idx += 1
-
-            """
-            for idx, token in enumerate(self.calculation_state):
-
-                if isinstance(token, Action) and token.is_priority_action:
-                    have_actions = True
-                    self.handle_action(idx, token)
-                    print('one: ', self.calculation_state)
-                    break
-
-                elif isinstance(token, Action):
-                    have_actions = True
-                    self.handle_action(idx, token)
-                    print('two: ', self.calculation_state)
-                    break
-            """
 
             if not have_actions:
                 self.state = self.State.CONCLUSION

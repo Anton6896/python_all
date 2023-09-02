@@ -46,7 +46,7 @@ class Tree:
              z                               z                           x
             / \                            /   \                        /  \ 
            y   T4  Left Rotate (y)        x    T4  Right Rotate(z)    y      z
-          / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / 
+          / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / \
         T1   x                          y    T3                    T1  T2 T3  T4
             / \                        / 
           T2   T3                    T1   T2
@@ -174,7 +174,7 @@ if __name__ == '__main__':
     root = tree.push(root, 25)
 
     print("insertion :: ")
-    print(f"pre order -> {tree.pre_order(root)}")
+    print(f"\npre order -> {tree.pre_order(root)}")
     print(f"in order -> {tree.in_order(root)}")
 
     print("deletion :: ")
