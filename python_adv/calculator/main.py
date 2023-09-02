@@ -126,34 +126,38 @@ class Tree:
     def _push(self, current_node, new_node):
         if current_node.weight > new_node.weight:
             self.lighter(current_node, new_node)
-
         elif current_node.weight < new_node.weight:
             self.havier(current_node, new_node)
-
         else:
             self.same_weight(current_node, new_node)
 
     def lighter(self, current_node: Node, new_node: Node):
-        # handle initial root left
-        if not current_node.parent and not current_node.left:
+        if (
+                self.root == current_node
+                and not current_node.left
+        ):
             self.root = new_node
             current_node.parent = self.root
             self.root.left = current_node
+            return self
 
-        else:
-            self._push(current_node.parent, new_node)
+        self._push(current_node.parent, new_node)
 
     def havier(self, current_node: Node, new_node: Node):
-        # handle initial root right
-        if not current_node.parent and not current_node.right:
-            new_node.parent = self.root
-            self.root.right = new_node
+        if (
+                current_node == self.root
+                and not current_node.right
+        ):
+            new_node.parent = current_node
+            current_node.right = new_node
+            return self
 
     def same_weight(self, current_node: Node, new_node: Node):
         if current_node == self.root:
             self.root = new_node
             current_node.parent = self.root
             self.root.left = current_node
+            return self
 
     def calculate_self(self) -> float:
         ...
@@ -213,5 +217,5 @@ class Worker:
 
 
 if __name__ == '__main__':
-    result = Worker('1 + 2 -').run()
+    result = Worker('1 + 2 -3').run()
     print(result)
