@@ -28,7 +28,7 @@ class Token:
             '-': sub,
             '*': mul,
             '/': floordiv,
-        }.get(self.type_of) or add
+        }.get(self.value) or add
 
     @staticmethod
     def get_available_actions():
@@ -86,6 +86,7 @@ class Node:
         self.right: Node = None
         self.parent: Node = None
         self.height = 1
+        self.value = None
 
     def __str__(self):
         return self.token.value
@@ -93,10 +94,31 @@ class Node:
     def calculate(self):
         if (
                 self.token.type_of == Token.ACTION
-                and self.left
-                and self.right
+                and self.left.value
+                and self.right.value
         ):
-            return self.token.use_it()(self.left.token.value, self.right.token.value)
+            self.value = self.token.use_it()(self.left.value, self.right.value)
+
+        elif (
+                self.token.type_of == Token.ACTION
+                and self.left.value
+                and self.right.token.type_of == Token.NUMBER
+        ):
+            self.value = self.token.use_it()(self.left.value, self.right.token.value)
+
+        elif (
+                self.token.type_of == Token.ACTION
+                and self.left.token.type_of == Token.NUMBER
+                and self.right.value
+        ):
+            self.value = self.token.use_it()(self.left.token.value, self.right.value)
+
+        elif (
+                self.token.type_of == Token.ACTION
+                and self.left.token.type_of == Token.NUMBER
+                and self.right.token.type_of == Token.NUMBER
+        ):
+            self.value = self.token.use_it()(self.left.token.value, self.right.token.value)
 
     @property
     def weight(self):
@@ -113,7 +135,7 @@ class Node:
 
 class Tree:
     def __init__(self):
-        self.root: Node = None
+        self.root: Node | None = None
 
     def push(self, new_node: Node):
         if not self.root:
@@ -175,8 +197,11 @@ class Tree:
         # Left -> Root -> Right
         res = []
         if node:
+            node.calculate()
             res.extend(self.in_order(node.left))
-            res.append(node.token.value)
+            if node.token.type_of == Token.ACTION:
+                node.calculate()
+                res.append(node.value)
             res.extend(self.in_order(node.right))
 
         return res
@@ -217,5 +242,5 @@ class Worker:
 
 
 if __name__ == '__main__':
-    result = Worker('1 + 2 -3').run()
+    result = Worker('1 +2 - 3').run()
     print(result)
