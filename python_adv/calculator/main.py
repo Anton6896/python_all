@@ -96,37 +96,32 @@ class Node:
             return f'{self.token.value}({self.weight})'
         return ''
 
-    def __repr__(self) -> str:
-        if self.token:
-            return str(self.token.value)
-        return ''
-
     def calculate(self):
         if (
-                self.token.type_of == Token.ACTION
-                and self.left.value
-                and self.right.value
+            self.token.type_of == Token.ACTION
+            and self.left.value
+            and self.right.value
         ):
             self.value = self.token.use_it()(self.left.value, self.right.value)
 
         elif (
-                self.token.type_of == Token.ACTION
-                and self.left.value
-                and self.right.token.type_of == Token.NUMBER
+            self.token.type_of == Token.ACTION
+            and self.left.value
+            and self.right.token.type_of == Token.NUMBER
         ):
             self.value = self.token.use_it()(self.left.value, self.right.token.value)
 
         elif (
-                self.token.type_of == Token.ACTION
-                and self.left.token.type_of == Token.NUMBER
-                and self.right.value
+            self.token.type_of == Token.ACTION
+            and self.left.token.type_of == Token.NUMBER
+            and self.right.value
         ):
             self.value = self.token.use_it()(self.left.token.value, self.right.value)
 
         elif (
-                self.token.type_of == Token.ACTION
-                and self.left.token.type_of == Token.NUMBER
-                and self.right.token.type_of == Token.NUMBER
+            self.token.type_of == Token.ACTION
+            and self.left.token.type_of == Token.NUMBER
+            and self.right.token.type_of == Token.NUMBER
         ):
             self.value = self.token.use_it()(self.left.token.value, self.right.token.value)
 
@@ -186,7 +181,7 @@ class Tree:
 
     def lighter_weight(self, current_node: Node, new_node: Node):
         logger.info(f'current %s heavier weight then new node %s', current_node.weight, new_node.weight)
-        
+
         self._push(current_node.parent, new_node)
 
     def heavier_weight(self, current_node: Node, new_node: Node):
@@ -198,7 +193,7 @@ class Tree:
             current_node.right = new_node
             new_node.parent = current_node
             return self
-        
+
         # * | /
         if (
             new_node.weight > current_node.weight
@@ -208,20 +203,29 @@ class Tree:
             new_node.parent = current_node.parent
             new_node.parent.right = new_node
             current_node.parent = new_node
-            
 
     def same_weight(self, current_node: Node, new_node: Node):
         logger.info(f'current %s same weight then new node %s', current_node.weight, new_node.weight)
         if not current_node.left:
             raise RuntimeError('invalid operations (++, -- ...)')
+
         new_node.left = current_node.right
         current_node.right.parent = new_node
         current_node.right = new_node
         new_node.parent = current_node
         return self
 
-    def calculate_self(self, node) -> float:
-        ...
+    def calculate_self(self, node: Node) -> float:
+        # Left -> Root -> Right
+        res = []
+        if node:
+            node.calculate()
+            res.extend(self.calculate_self(node.left))
+            if node.value:
+                res.append(node.value)
+            res.extend(self.calculate_self(node.right))
+
+        return res
 
     def get_most_right(self, node: Node) -> Node:
         if node.right:
@@ -274,5 +278,5 @@ class Worker:
 
 
 if __name__ == '__main__':
-    result = Worker('1 + 2 - 3 * 4').run()
+    result = Worker('1 + 2 -1 + 5').run()
     logger.info('result: %s', result)
