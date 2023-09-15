@@ -7,9 +7,9 @@ class Bitmap:
         print(f'drawing some image : {self.name}')
 
 
-class LazyImage(Bitmap):
+class LazyImage:
     def __init__(self, name) -> None:
-        super().__init__(name)
+        self.name = name
         self.bitmap: Bitmap = None
 
     def draw(self):
@@ -29,4 +29,4 @@ if __name__ == '__main__':
 
     bp = LazyImage('some.name.pp')
     draw_image(bp)
-    draw_image(bp)
+    # draw_image(bp)

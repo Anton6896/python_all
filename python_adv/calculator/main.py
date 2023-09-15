@@ -66,9 +66,11 @@ class Tokenizer:
             if ch in Token.get_available_actions():
                 try:
                     if holder.strip():
-                        self.tokens.append(Token(type_of=Token.NUMBER, value=float(holder.strip())))
+                        self.tokens.append(
+                            Token(type_of=Token.NUMBER, value=float(holder.strip())))
                 except ValueError:
-                    raise Exception('its not math expression: ' + self.expression)
+                    raise Exception(
+                        'its not math expression: ' + self.expression)
 
                 self.tokens.append(Token(type_of=Token.ACTION, value=ch))
                 holder = ''
@@ -76,7 +78,8 @@ class Tokenizer:
                 holder += ch
 
         if holder.strip():
-            self.tokens.append(Token(type_of=Token.NUMBER, value=float(holder.strip())))
+            self.tokens.append(
+                Token(type_of=Token.NUMBER, value=float(holder.strip())))
 
 
 class Node:
@@ -89,7 +92,14 @@ class Node:
         self.value = None
 
     def __str__(self):
-        return self.token.value
+        if self.token:
+            return f'{self.token.value}({self.weight})'
+        return ''
+
+    def __repr__(self) -> str:
+        if self.token:
+            return str(self.token.value)
+        return ''
 
     def calculate(self):
         if (
@@ -129,7 +139,6 @@ class Node:
         """
         if self.token.type_of == Token.NUMBER:
             return 3
-
         return 2 if self.token.is_priority_action else 1
 
 
@@ -139,71 +148,95 @@ class Tree:
 
     def push(self, new_node: Node):
         if not self.root:
+            logger.info('pushing to root')
             self.root = new_node
             return self
 
-        current_node: Node = self.get_next_target(self.root)
+        current_node: Node = self.get_most_right(self.root)
         self._push(current_node, new_node)
 
-    def _push(self, current_node, new_node):
+    def _push(self, current_node: Node, new_node: Node):
+        if (
+                not current_node.parent
+                and not current_node.left
+                and current_node.weight > new_node.weight
+        ):
+            logger.info('pushing to left (from root)')
+            current_node.parent = new_node
+            new_node.left = current_node
+            self.root = new_node
+            return self
+
+        if (
+                not current_node.parent
+                and current_node.left
+                and new_node.weight > current_node.weight
+        ):
+            logger.info('pushing to right (from root)')
+            current_node.right = new_node
+            new_node.parent = current_node
+            return self
+
         if current_node.weight > new_node.weight:
-            self.lighter(current_node, new_node)
+            self.lighter_weight(current_node, new_node)
         elif current_node.weight < new_node.weight:
-            self.havier(current_node, new_node)
+            self.heavier_weight(current_node, new_node)
         else:
             self.same_weight(current_node, new_node)
 
-    def lighter(self, current_node: Node, new_node: Node):
-        if (
-                self.root == current_node
-                and not current_node.left
-        ):
-            self.root = new_node
-            current_node.parent = self.root
-            self.root.left = current_node
-            return self
-
+    def lighter_weight(self, current_node: Node, new_node: Node):
+        logger.info(f'current %s heavier weight then new node %s', current_node.weight, new_node.weight)
+        
         self._push(current_node.parent, new_node)
 
-    def havier(self, current_node: Node, new_node: Node):
+    def heavier_weight(self, current_node: Node, new_node: Node):
+        logger.info(f'current %s lighter weight then new node %s', current_node.weight, new_node.weight)
         if (
-                current_node == self.root
-                and not current_node.right
+            current_node.left
+            and not current_node.right
         ):
-            new_node.parent = current_node
             current_node.right = new_node
+            new_node.parent = current_node
             return self
+        
+        # * | /
+        if (
+            new_node.weight > current_node.weight
+            and new_node.weight < current_node.right.weight
+        ):
+            new_node.left = current_node
+            new_node.parent = current_node.parent
+            new_node.parent.right = new_node
+            current_node.parent = new_node
+            
 
     def same_weight(self, current_node: Node, new_node: Node):
-        if current_node == self.root:
-            self.root = new_node
-            current_node.parent = self.root
-            self.root.left = current_node
-            return self
+        logger.info(f'current %s same weight then new node %s', current_node.weight, new_node.weight)
+        if not current_node.left:
+            raise RuntimeError('invalid operations (++, -- ...)')
+        new_node.left = current_node.right
+        current_node.right.parent = new_node
+        current_node.right = new_node
+        new_node.parent = current_node
+        return self
 
-    def calculate_self(self) -> float:
+    def calculate_self(self, node) -> float:
         ...
 
-    def get_next_target(self, node: Node) -> Node:
-        """
-        math expression left -> to right
-        getting most right node
-        """
+    def get_most_right(self, node: Node) -> Node:
         if node.right:
-            return self.get_next_target(node.right)
+            return self.get_most_right(node.right)
         return node
 
     def in_order(self, node: Node = None) -> list:
         # Left -> Root -> Right
         res = []
         if node:
-            node.calculate()
-            res.extend(self.in_order(node.left))
-            if node.token.type_of == Token.ACTION:
-                node.calculate()
-                res.append(node.value)
-            res.extend(self.in_order(node.right))
-
+            if node.left:
+                res.extend(self.in_order(node.left))
+            res.append(node.token.value)
+            if node.right:
+                res.extend(self.in_order(node.right))
         return res
 
 
@@ -228,19 +261,18 @@ class Worker:
                 inner_tree = Tree()
                 while self.token_data:
                     token: Token = self.token_data.pop(0)
-                    inner_tree.push(Node(token=token))
                     if token.is_end_parenthesis:
-                        inner_result = inner_tree.calculate_self()
+                        inner_result = inner_tree.calculate_self(inner_tree.root)
                         main_tree.push(Node(token=Token(type_of=Token.NUMBER, value=inner_result)))
                         break
+                    inner_tree.push(Node(token=token))
 
             main_tree.push(Node(token=token))
 
-        r = main_tree.in_order(main_tree.root)
-        print(r)
-        return main_tree.calculate_self()
+        logger.info('inorder %s', main_tree.in_order(main_tree.root))
+        return main_tree.calculate_self(main_tree.root)
 
 
 if __name__ == '__main__':
-    result = Worker('1 +2 - 3').run()
-    print(result)
+    result = Worker('1 + 2 - 3 * 4').run()
+    logger.info('result: %s', result)

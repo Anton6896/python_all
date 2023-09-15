@@ -13,6 +13,7 @@ class GraphicObject:
         if self.color:
             items.append(self.color)
         items.append(f'{self.name}\n')
+
         for child in self.children:
             child._print(items, depth + 1)
 
